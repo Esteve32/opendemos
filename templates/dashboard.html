@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="display-6 mb-3">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </h1>
+        <p class="lead text-muted">Manage your Google Gemini HTML exports and integrate with Google Workspace</p>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card card-stat h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title text-muted">Total Files</h5>
+                        <h2 class="mb-0">{{ stats.total_files }}</h2>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-files text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-stat h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title text-muted">Total Size</h5>
+                        <h2 class="mb-0">{{ "%.2f"|format(stats.total_size_mb) }} MB</h2>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-hdd text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-stat h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title text-muted">Gemini Canvas</h5>
+                        <h2 class="mb-0">{{ stats.gemini_canvas_files }}</h2>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-palette text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-stat h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title text-muted">With Images</h5>
+                        <h2 class="mb-0">{{ stats.files_with_images }}</h2>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-image text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-lightning"></i> Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('upload_file') }}" class="btn btn-primary w-100">
+                            <i class="bi bi-upload"></i> Upload HTML File
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <button type="button" class="btn btn-success w-100" onclick="batchUploadToDrive()">
+                            <i class="bi bi-cloud-upload"></i> Batch Upload to Drive
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <button type="button" class="btn btn-warning w-100" onclick="cleanupDuplicates()">
+                            <i class="bi bi-trash"></i> Cleanup Duplicates
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{{ url_for('google_drive') }}" class="btn btn-info w-100">
+                            <i class="bi bi-google"></i> Google Drive
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Files -->
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-clock-history"></i> Recent Files
+                </h5>
+                <a href="{{ url_for('list_files') }}" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="card-body">
+                {% if files %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Title</th>
+                                    <th>Size</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in files %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-file-earmark-code text-primary me-2"></i>
+                                            <span>{{ file.filename[:30] }}{% if file.filename|length > 30 %}...{% endif %}</span>
+                                            {% if file.is_gemini_canvas %}
+                                                <span class="badge gemini-badge ms-2">Gemini</span>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td>{{ file.title[:30] }}{% if file.title|length > 30 %}...{% endif %}</td>
+                                    <td>{{ "%.2f"|format(file.size_mb) }} MB</td>
+                                    <td>{{ file.created_time[:19] }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ url_for('view_file', filename=file.filename) }}" class="btn btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <button class="btn btn-outline-success" onclick="uploadToDrive('{{ file.path }}', '{{ file.filename }}')">
+                                                <i class="bi bi-cloud-upload"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
+                        <p class="text-muted mt-2">No HTML files found. <a href="{{ url_for('upload_file') }}">Upload your first file</a>!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-calendar3"></i> Files by Date
+                </h5>
+            </div>
+            <div class="card-body">
+                {% if organized_files %}
+                    {% for date, date_files in organized_files.items() %}
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold">{{ date }}</span>
+                            <span class="badge bg-secondary">{{ date_files|length }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted">No files to organize</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Modal -->
+<div class="modal fade" id="progressModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Processing...</h5>
+            </div>
+            <div class="modal-body">
+                <div class="progress mb-3">
+                    <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%">0%</div>
+                </div>
+                <div id="progressText">Starting...</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function showProgress(title) {
+    document.querySelector('#progressModal .modal-title').textContent = title;
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('progressBar').textContent = '0%';
+    document.getElementById('progressText').textContent = 'Starting...';
+    
+    const modal = new bootstrap.Modal(document.getElementById('progressModal'));
+    modal.show();
+    return modal;
+}
+
+function updateProgress(percent, text) {
+    document.getElementById('progressBar').style.width = percent + '%';
+    document.getElementById('progressBar').textContent = Math.round(percent) + '%';
+    document.getElementById('progressText').textContent = text;
+}
+
+function uploadToDrive(filePath, filename) {
+    const modal = showProgress('Uploading to Google Drive');
+    
+    fetch('/api/upload_to_drive', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            file_path: filePath,
+            title: filename
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        modal.hide();
+        if (data.success) {
+            alert(`Successfully uploaded ${filename} to Google Drive!\n\nView at: ${data.link}`);
+        } else {
+            alert(`Upload failed: ${data.error}`);
+        }
+    })
+    .catch(error => {
+        modal.hide();
+        alert(`Upload failed: ${error}`);
+    });
+}
+
+function batchUploadToDrive() {
+    if (!confirm('Upload all files to Google Drive? This may take a while.')) {
+        return;
+    }
+    
+    const modal = showProgress('Batch Uploading to Google Drive');
+    
+    fetch('/api/batch_upload_to_drive', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        modal.hide();
+        if (data.total_files > 0) {
+            alert(`Batch upload completed!\n\nTotal files: ${data.total_files}\nSuccessful uploads: ${data.successful_uploads}`);
+            location.reload();
+        } else {
+            alert('No files found to upload');
+        }
+    })
+    .catch(error => {
+        modal.hide();
+        alert(`Batch upload failed: ${error}`);
+    });
+}
+
+function cleanupDuplicates() {
+    if (!confirm('Remove duplicate files? This action cannot be undone.')) {
+        return;
+    }
+    
+    const modal = showProgress('Cleaning up duplicates');
+    updateProgress(50, 'Scanning for duplicates...');
+    
+    fetch('/api/cleanup_duplicates', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        modal.hide();
+        if (data.count > 0) {
+            alert(`Removed ${data.count} duplicate files:\n\n${data.removed_files.join('\n')}`);
+            location.reload();
+        } else {
+            alert('No duplicates found');
+        }
+    })
+    .catch(error => {
+        modal.hide();
+        alert(`Cleanup failed: ${error}`);
+    });
+}
+</script>
+{% endblock %}

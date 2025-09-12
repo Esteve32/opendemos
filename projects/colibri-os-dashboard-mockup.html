@@ -3,9 +3,508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>colibri-os-dashboard-mockup.html</title>
+    <title>Colibri OS - Modern Dashboard Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .desktop {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .taskbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .taskbar-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2a5298;
+        }
+        
+        .taskbar-apps {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .app-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .app-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .taskbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .widget {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .widget-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .widget-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .widget-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .system-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 16px;
+            background: linear-gradient(45deg, #f7fafc, #edf2f7);
+            border-radius: 12px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2a5298;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .action-btn {
+            padding: 16px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .action-btn:hover {
+            transform: scale(1.05);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .recent-files {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .file-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #4299e1, #3182ce);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .file-info {
+            flex: 1;
+        }
+        
+        .file-name {
+            font-weight: 500;
+            font-size: 14px;
+            color: #2d3748;
+        }
+        
+        .file-size {
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .weather {
+            text-align: center;
+        }
+        
+        .weather-temp {
+            font-size: 48px;
+            font-weight: 300;
+            color: #2a5298;
+            margin: 20px 0;
+        }
+        
+        .weather-desc {
+            color: #718096;
+            margin-bottom: 20px;
+        }
+        
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            text-align: center;
+        }
+        
+        .weather-detail {
+            padding: 12px;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+        
+        .floating-windows {
+            position: fixed;
+            top: 100px;
+            right: 40px;
+            z-index: 1000;
+        }
+        
+        .window {
+            width: 300px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .window-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .window-control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .window-content {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>colibri-os-dashboard-mockup.html</h1>
+    <div class="desktop">
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <div class="taskbar-left">
+                <div class="logo">🐦 Colibri OS</div>
+                <div class="taskbar-apps">
+                    <div class="app-icon" title="File Manager">📁</div>
+                    <div class="app-icon" title="Web Browser">🌐</div>
+                    <div class="app-icon" title="Code Editor">💻</div>
+                    <div class="app-icon" title="Terminal">⚡</div>
+                    <div class="app-icon" title="Settings">⚙️</div>
+                </div>
+            </div>
+            <div class="taskbar-right">
+                <span>🔋 98%</span>
+                <span>📶 WiFi</span>
+                <span>🔊</span>
+                <span>2:34 PM</span>
+            </div>
+        </div>
+
+        <!-- Main Desktop Content -->
+        <div class="main-content">
+            <!-- System Overview -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">📊</div>
+                    <div class="widget-title">System Overview</div>
+                </div>
+                <div class="system-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">24%</div>
+                        <div class="stat-label">CPU Usage</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">8.2GB</div>
+                        <div class="stat-label">Memory Used</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">456GB</div>
+                        <div class="stat-label">Storage Free</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">23°C</div>
+                        <div class="stat-label">CPU Temp</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">⚡</div>
+                    <div class="widget-title">Quick Actions</div>
+                </div>
+                <div class="quick-actions">
+                    <a href="#" class="action-btn">🖥️ Screenshots</a>
+                    <a href="#" class="action-btn">🔧 System Tools</a>
+                    <a href="#" class="action-btn">🔄 Update System</a>
+                    <a href="#" class="action-btn">🧹 Cleanup</a>
+                </div>
+            </div>
+
+            <!-- Recent Files -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">📂</div>
+                    <div class="widget-title">Recent Files</div>
+                </div>
+                <div class="recent-files">
+                    <div class="file-item">
+                        <div class="file-icon">📄</div>
+                        <div class="file-info">
+                            <div class="file-name">Project Proposal.docx</div>
+                            <div class="file-size">2.4 MB • 2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">🖼️</div>
+                        <div class="file-info">
+                            <div class="file-name">Dashboard_Mockup.png</div>
+                            <div class="file-size">1.8 MB • 3 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">💻</div>
+                        <div class="file-info">
+                            <div class="file-name">api_integration.py</div>
+                            <div class="file-size">45 KB • 5 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">📊</div>
+                        <div class="file-info">
+                            <div class="file-name">Q4_Analytics.xlsx</div>
+                            <div class="file-size">5.2 MB • 1 day ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Widget -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">🌤️</div>
+                    <div class="widget-title">Weather</div>
+                </div>
+                <div class="weather">
+                    <div class="weather-temp">22°C</div>
+                    <div class="weather-desc">Partly Cloudy</div>
+                    <div class="weather-details">
+                        <div class="weather-detail">
+                            <div>💨 12 km/h</div>
+                            <div style="font-size: 12px; color: #718096;">Wind</div>
+                        </div>
+                        <div class="weather-detail">
+                            <div>💧 65%</div>
+                            <div style="font-size: 12px; color: #718096;">Humidity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Widget -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">📅</div>
+                    <div class="widget-title">Calendar</div>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 24px; font-weight: bold; color: #2a5298;">December 12</div>
+                    <div style="color: #718096; margin: 10px 0;">Thursday</div>
+                    <div style="background: #f7fafc; padding: 12px; border-radius: 8px; margin-top: 16px;">
+                        <div style="font-weight: 500;">📞 Team Meeting</div>
+                        <div style="font-size: 12px; color: #718096;">3:00 PM - 4:00 PM</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- App Store Widget -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">🏪</div>
+                    <div class="widget-title">App Store</div>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-size: 18px; font-weight: 600; color: #2d3748;">Featured Apps</div>
+                        <div style="font-size: 14px; color: #718096;">Discover new productivity tools</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div style="background: #f7fafc; padding: 16px; border-radius: 12px; cursor: pointer;">
+                            <div style="font-size: 24px; margin-bottom: 8px;">🎨</div>
+                            <div style="font-size: 12px; font-weight: 500;">Design Pro</div>
+                        </div>
+                        <div style="background: #f7fafc; padding: 16px; border-radius: 12px; cursor: pointer;">
+                            <div style="font-size: 24px; margin-bottom: 8px;">📝</div>
+                            <div style="font-size: 12px; font-weight: 500;">Notes+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Windows -->
+    <div class="floating-windows">
+        <div class="window">
+            <div class="window-header">
+                <span>🔔 Notifications</span>
+                <div class="window-controls">
+                    <div class="window-control"></div>
+                    <div class="window-control"></div>
+                    <div class="window-control"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                <div style="font-size: 14px; margin-bottom: 12px;">
+                    <strong>System Update Available</strong><br>
+                    <span style="color: #718096; font-size: 12px;">Click to install Colibri OS 2.1</span>
+                </div>
+                <div style="font-size: 14px;">
+                    <strong>3 new messages</strong><br>
+                    <span style="color: #718096; font-size: 12px;">Team collaboration workspace</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.querySelectorAll('.app-icon').forEach(icon => {
+            icon.addEventListener('click', () => {
+                icon.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    icon.style.transform = 'scale(1.1)';
+                }, 100);
+            });
+        });
+
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                btn.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1.05)';
+                }, 150);
+            });
+        });
+
+        // Update time every minute
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            document.querySelector('.taskbar-right span:last-child').textContent = timeString;
+        }
+        setInterval(updateTime, 60000);
+    </script>
 </body>
 </html>

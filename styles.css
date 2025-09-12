@@ -1,0 +1,594 @@
+/* 🌟 ADHD-Friendly Styles with Visual Hierarchy 🌟 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 🎨 Color palette for ADHD-friendly design */
+    --primary-color: #4CAF50;      /* Green for success/go */
+    --secondary-color: #2196F3;    /* Blue for info */
+    --tertiary-color: #FF9800;     /* Orange for attention */
+    --danger-color: #f44336;       /* Red for danger/stop */
+    --warning-color: #FFC107;      /* Yellow for warning */
+    --success-color: #4CAF50;      /* Green for success */
+    
+    /* 🎯 Background colors */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-hover: #f0f0f0;
+    
+    /* 📝 Text colors */
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    
+    /* 📏 Spacing system for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    
+    /* 🎭 Shadows for depth perception */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
+    
+    /* 📐 Border radius for friendly appearance */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+}
+
+/* 📱 Base styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* 📦 Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+/* 🎯 Header with clear visual hierarchy */
+.header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+    background: var(--bg-secondary);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--primary-color);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* 📊 Progress indicator for clear navigation */
+.progress-indicator {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    background: var(--bg-hover);
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.step.active {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.step-number {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.step-text {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* 🃏 Card component for grouping content */
+.card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    border-left: 5px solid var(--primary-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--bg-hover);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* 🎛️ Input options with clear visual distinction */
+.input-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.option-btn {
+    padding: var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.option-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.option-btn.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.option-btn.secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.option-btn.tertiary {
+    background: var(--tertiary-color);
+    color: white;
+}
+
+/* 📝 Form styling for better UX */
+.input-form {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: var(--bg-hover);
+    border-radius: var(--radius-md);
+    border: 2px dashed var(--primary-color);
+}
+
+.input-form.hidden {
+    display: none;
+}
+
+.input-form h3 {
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary-color);
+    font-size: 1.25rem;
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--bg-hover);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+/* 💾 Save button with prominent styling */
+.save-btn {
+    background: var(--success-color);
+    color: white;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.save-btn:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* 📁 File drop zone */
+.file-drop-zone {
+    border: 3px dashed var(--primary-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xxl);
+    text-align: center;
+    background: var(--bg-secondary);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.file-drop-zone:hover {
+    background: var(--bg-hover);
+    border-color: var(--secondary-color);
+}
+
+.file-drop-zone p {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-secondary);
+}
+
+#file-upload {
+    margin-top: var(--spacing-md);
+}
+
+/* 🎛️ Document controls */
+.documents-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.control-btn {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: #1976D2;
+    transform: translateY(-1px);
+}
+
+#sort-options {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--radius-md);
+    background: white;
+    cursor: pointer;
+}
+
+/* 📄 Documents grid */
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    min-height: 200px;
+}
+
+.document-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.document-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.document-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-color);
+}
+
+.document-meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-sm);
+}
+
+.document-preview {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    max-height: 100px;
+    overflow: hidden;
+    position: relative;
+}
+
+.document-preview::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 20px;
+    width: 100%;
+    background: linear-gradient(transparent, var(--bg-secondary));
+}
+
+/* 🎭 Empty state styling */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-muted);
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+/* ❓ Help section */
+.help-steps {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.help-step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--bg-hover);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--tertiary-color);
+}
+
+.step-emoji {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.step-content kbd {
+    background: var(--text-primary);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* 🪟 Modal styling */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    margin: var(--spacing-md);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+}
+
+.close {
+    color: var(--text-muted);
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: var(--spacing-lg);
+    top: var(--spacing-lg);
+}
+
+.close:hover {
+    color: var(--danger-color);
+}
+
+.modal-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn.secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn.danger {
+    background: var(--danger-color);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 📱 Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-sm);
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .input-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .progress-indicator {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .documents-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 🎨 Utility classes */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-lg {
+    margin-top: var(--spacing-lg);
+}
+
+.mb-lg {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ✨ Animations for better UX */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card,
+.document-card {
+    animation: fadeIn 0.5s ease;
+}
+
+/* 🎯 Focus indicators for accessibility */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* 🔄 Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 Tab Organizer - ADHD Friendly! 🧠✨</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with clear purpose -->
+        <header class="header">
+            <h1>🌟 Tab Organizer Pro 🌟</h1>
+            <p class="subtitle">📋 Turn your Chrome chaos into organized documents! 🎯</p>
+            <div class="progress-indicator">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1️⃣</span>
+                    <span class="step-text">Add Content</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2️⃣</span>
+                    <span class="step-text">Organize</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3️⃣</span>
+                    <span class="step-text">Export</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content area -->
+        <main class="main-content">
+            <!-- Input section -->
+            <section class="input-section card">
+                <h2>📝 Add Your Content</h2>
+                <div class="input-options">
+                    <button class="option-btn primary" onclick="showTabInput()">
+                        🌐 Add from Chrome Tab
+                    </button>
+                    <button class="option-btn secondary" onclick="showTextInput()">
+                        ✍️ Paste HTML/Text
+                    </button>
+                    <button class="option-btn tertiary" onclick="showFileInput()">
+                        📁 Upload File
+                    </button>
+                </div>
+
+                <!-- Tab input form -->
+                <div id="tab-input" class="input-form hidden">
+                    <h3>🌐 Chrome Tab Content</h3>
+                    <div class="form-group">
+                        <label for="tab-url">🔗 Tab URL:</label>
+                        <input type="url" id="tab-url" placeholder="https://example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="tab-title">📝 Tab Title:</label>
+                        <input type="text" id="tab-title" placeholder="My Important Tab">
+                    </div>
+                    <div class="form-group">
+                        <label for="tab-content">📄 Content (HTML or Text):</label>
+                        <textarea id="tab-content" rows="6" placeholder="Paste your content here..."></textarea>
+                    </div>
+                    <button class="save-btn" onclick="saveTabContent()">💾 Save Content</button>
+                </div>
+
+                <!-- Text input form -->
+                <div id="text-input" class="input-form hidden">
+                    <h3>✍️ Direct Input</h3>
+                    <div class="form-group">
+                        <label for="content-title">📝 Title:</label>
+                        <input type="text" id="content-title" placeholder="My Document Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="content-text">📄 Content:</label>
+                        <textarea id="content-text" rows="8" placeholder="Paste your HTML or text content here..."></textarea>
+                    </div>
+                    <button class="save-btn" onclick="saveTextContent()">💾 Save Content</button>
+                </div>
+
+                <!-- File input form -->
+                <div id="file-input" class="input-form hidden">
+                    <h3>📁 Upload File</h3>
+                    <div class="file-drop-zone" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+                        <p>🎯 Drop your file here or click to browse</p>
+                        <input type="file" id="file-upload" accept=".html,.txt,.md" onchange="handleFileSelect(event)">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Documents section -->
+            <section class="documents-section card">
+                <h2>📚 Your Documents</h2>
+                <div class="documents-controls">
+                    <button class="control-btn" onclick="createNewDocument()">
+                        ➕ New Document
+                    </button>
+                    <button class="control-btn" onclick="exportAllDocuments()">
+                        📤 Export All
+                    </button>
+                    <select id="sort-options" onchange="sortDocuments()">
+                        <option value="date">📅 Sort by Date</option>
+                        <option value="title">🔤 Sort by Title</option>
+                        <option value="size">📏 Sort by Size</option>
+                    </select>
+                </div>
+
+                <div id="documents-container" class="documents-grid">
+                    <!-- Documents will be populated here -->
+                    <div class="empty-state">
+                        <h3>🎯 Ready to organize!</h3>
+                        <p>Add your first piece of content above to get started! 🚀</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Help section -->
+            <section class="help-section card">
+                <h2>❓ How to Extract Content from Chrome</h2>
+                <div class="help-steps">
+                    <div class="help-step">
+                        <span class="step-emoji">1️⃣</span>
+                        <div class="step-content">
+                            <h4>Open Developer Tools</h4>
+                            <p>Press <kbd>F12</kbd> or right-click → "Inspect"</p>
+                        </div>
+                    </div>
+                    <div class="help-step">
+                        <span class="step-emoji">2️⃣</span>
+                        <div class="step-content">
+                            <h4>Copy HTML</h4>
+                            <p>Right-click on &lt;html&gt; → "Copy" → "Copy outerHTML"</p>
+                        </div>
+                    </div>
+                    <div class="help-step">
+                        <span class="step-emoji">3️⃣</span>
+                        <div class="step-content">
+                            <h4>Paste Here</h4>
+                            <p>Use the "Paste HTML/Text" button above! 🎉</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Document Modal -->
+    <div id="document-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">📝 Document</h2>
+            <div id="modal-body"></div>
+            <div class="modal-actions">
+                <button class="btn primary" onclick="editDocument()">✏️ Edit</button>
+                <button class="btn secondary" onclick="exportDocument()">📤 Export</button>
+                <button class="btn danger" onclick="deleteDocument()">🗑️ Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

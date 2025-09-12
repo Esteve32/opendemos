@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine Vortex - Enter the Coffee Analytics Matrix</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .caffeine-hero {
+            background: linear-gradient(135deg, #8B4513 0%, #654321 50%, #3e2723 100%);
+            color: #ffeaa7;
+            padding: 3rem 0;
+            position: relative;
+        }
+        .caffeine-hero::before {
+            content: "☕💫⚡🧠";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.8;
+            animation: buzz 1s infinite alternate;
+        }
+        @keyframes buzz {
+            0% { transform: translateX(0px); }
+            100% { transform: translateX(2px); }
+        }
+        .coffee-card {
+            background: linear-gradient(45deg, #6f4e37 0%, #8b4513 100%);
+            color: #ffeaa7;
+            border: 2px solid #d4a574;
+        }
+        .jittery {
+            animation: jitter 0.1s infinite;
+        }
+        @keyframes jitter {
+            0% { transform: translate(0px, 0px); }
+            25% { transform: translate(1px, 1px); }
+            50% { transform: translate(-1px, 1px); }
+            75% { transform: translate(1px, -1px); }
+            100% { transform: translate(-1px, -1px); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="caffeine-hero">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold jittery">
+                <i class="bi bi-cup-hot"></i> Caffeine Vortex
+            </h1>
+            <p class="lead pulse">Descend into the swirling abyss of coffee analytics!</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="coffee-card card p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="text-warning">☕ Welcome to the Matrix of Bean Juice! ☕</h2>
+                        <p class="lead text-light">
+                            You've entered the quantum realm where caffeine molecules dance with data points! 
+                            This is where your productivity meets the perfect brew ratio, and where every 
+                            sip is scientifically optimized for maximum coding efficiency.
+                        </p>
+                    </div>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3">
+                            <div class="card bg-warning text-dark text-center">
+                                <div class="card-body">
+                                    <i class="bi bi-speedometer2 pulse" style="font-size: 2rem;"></i>
+                                    <h4 class="mt-2">847mg</h4>
+                                    <p class="mb-0">Caffeine Today</p>
+                                    <small class="text-danger">⚠️ Approaching Jitter Zone</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-success text-white text-center">
+                                <div class="card-body">
+                                    <i class="bi bi-graph-up" style="font-size: 2rem;"></i>
+                                    <h4 class="mt-2">127%</h4>
+                                    <p class="mb-0">Productivity Boost</p>
+                                    <small>vs. Yesterday</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-info text-white text-center">
+                                <div class="card-body">
+                                    <i class="bi bi-clock" style="font-size: 2rem;"></i>
+                                    <h4 class="mt-2">13</h4>
+                                    <p class="mb-0">Cups Consumed</p>
+                                    <small>Since 6 AM</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-danger text-white text-center">
+                                <div class="card-body">
+                                    <i class="bi bi-heart-pulse jittery" style="font-size: 2rem;"></i>
+                                    <h4 class="mt-2">142 BPM</h4>
+                                    <p class="mb-0">Heart Rate</p>
+                                    <small>Caffeine-Powered</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h4 class="text-warning">⚡ Today's Brew Analytics</h4>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item bg-transparent text-light border-warning">
+                                    <strong>Morning Boost:</strong> Dark Roast (10/10 efficiency)
+                                </div>
+                                <div class="list-group-item bg-transparent text-light border-warning">
+                                    <strong>Midday Refuel:</strong> Espresso Shot x3 (Code quality +50%)
+                                </div>
+                                <div class="list-group-item bg-transparent text-light border-warning">
+                                    <strong>Evening Override:</strong> Cold Brew (Sleep.exe disabled)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="text-warning">🧠 Neural Activity Monitor</h4>
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 85%">
+                                    Focus Level: 85%
+                                </div>
+                            </div>
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 92%">
+                                    Code Quality: 92%
+                                </div>
+                            </div>
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 15%">
+                                    Sleep Probability: 15%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning text-dark text-center">
+                        <h5><i class="bi bi-lightbulb jittery"></i> Vortex Algorithm Recommendation:</h5>
+                        <p class="mb-0">
+                            "Based on your current caffeine saturation levels and code commit patterns, 
+                            we suggest switching to decaf for the next 2.7 hours to avoid a productivity crash. 
+                            Your future caffeinated self will thank you!"
+                        </p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="../index.html" class="btn btn-outline-warning me-2">
+                            <i class="bi bi-arrow-left"></i> Exit the Vortex
+                        </a>
+                        <button class="btn btn-warning text-dark">
+                            <i class="bi bi-plus-circle"></i> Log Another Cup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

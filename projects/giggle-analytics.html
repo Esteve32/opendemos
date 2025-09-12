@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giggle Analytics - Where Data Meets Comedy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .giggle-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+        }
+        .giggle-hero::before {
+            content: "😂📊🎭📈";
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        .laugh-card {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 3px solid #ffd700;
+        }
+        .meme-metric {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+        }
+        .giggle-pulse {
+            animation: gigglePulse 3s infinite;
+        }
+        @keyframes gigglePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="giggle-hero">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold giggle-pulse">
+                <i class="bi bi-emoji-laughing"></i> Giggle Analytics
+            </h1>
+            <p class="lead">Serious data analysis with a sense of humor!</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="laugh-card card p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="text-warning">🎭 Welcome to the Comedy Data Lab! 🎭</h2>
+                        <p class="lead">
+                            Where algorithms have a sense of humor and data visualization makes you LOL! 
+                            We measure everything from meme virality to dad joke effectiveness, 
+                            because life's too short for boring analytics.
+                        </p>
+                    </div>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="meme-metric p-3 text-center">
+                                <i class="bi bi-graph-up-arrow" style="font-size: 2.5rem; color: #ffd700;"></i>
+                                <h3 class="mt-2 text-warning">847,293</h3>
+                                <p class="mb-0">Laughs Generated This Week</p>
+                                <small class="text-light opacity-75">↑ 23% from last week</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="meme-metric p-3 text-center">
+                                <i class="bi bi-emoji-smile" style="font-size: 2.5rem; color: #ffd700;"></i>
+                                <h3 class="mt-2 text-warning">92.7%</h3>
+                                <p class="mb-0">Audience Satisfaction Rate</p>
+                                <small class="text-light opacity-75">Premium dad joke quality</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h4 class="text-warning mb-3">🏆 Top Performing Content</h4>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item bg-transparent text-light border-warning">
+                                    <strong>1.</strong> "Why don't scientists trust atoms?" 
+                                    <span class="badge bg-success float-end">98.2% laugh rate</span>
+                                </div>
+                                <div class="list-group-item bg-transparent text-light border-warning">
+                                    <strong>2.</strong> Cat meme compilation #47 
+                                    <span class="badge bg-info float-end">2.3M shares</span>
+                                </div>
+                                <div class="list-group-item bg-transparent text-light border-warning">
+                                    <strong>3.</strong> "Debugging at 3 AM" comic 
+                                    <span class="badge bg-warning text-dark float-end">95.7% relatability</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="text-warning mb-3">📊 Humor Analytics Dashboard</h4>
+                            <div class="mb-3">
+                                <label class="text-light">Pun Quality Index</label>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 78%">78% Groan-worthy</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-light">Meme Freshness Factor</label>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: 85%">85% Fresh</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-light">Dad Joke Density</label>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" style="width: 94%">94% Concentrated</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h4 class="text-warning mb-3">🎯 Real-time Giggle Metrics</h4>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <div class="card bg-primary text-white text-center">
+                                        <div class="card-body">
+                                            <h5>😂 LOLs/min</h5>
+                                            <h3>127</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-success text-white text-center">
+                                        <div class="card-body">
+                                            <h5>🤣 ROFLs/hour</h5>
+                                            <h3>43</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-warning text-dark text-center">
+                                        <div class="card-body">
+                                            <h5>😄 Smiles Generated</h5>
+                                            <h3>8,492</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-info text-white text-center">
+                                        <div class="card-body">
+                                            <h5>🙄 Eye Rolls</h5>
+                                            <h3>2,847</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning text-dark text-center">
+                        <h5><i class="bi bi-lightbulb"></i> Comedy Algorithm Insight:</h5>
+                        <p class="mb-0">
+                            "Our AI has determined that your humor style is 73% dad jokes, 15% puns, 
+                            and 12% existential memes. We recommend increasing your pun game for optimal giggle efficiency!"
+                        </p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="../index.html" class="btn btn-outline-warning me-2">
+                            <i class="bi bi-arrow-left"></i> Back to Serious Business
+                        </a>
+                        <button class="btn btn-warning text-dark">
+                            <i class="bi bi-plus-circle"></i> Submit New Joke
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

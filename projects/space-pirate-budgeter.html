@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Pirate Budgeter - Manage Your Cosmic Treasure</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .pirate-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffd700;
+            padding: 3rem 0;
+            position: relative;
+        }
+        .pirate-hero::before {
+            content: "🏴‍☠️⚔️💰🚀";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+        .treasure-card {
+            background: linear-gradient(45deg, #2c3e50 0%, #34495e 100%);
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+        .doubloon {
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="pirate-hero">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">
+                <i class="bi bi-currency-dollar"></i> Space Pirate Budgeter
+            </h1>
+            <p class="lead">Ahoy! Keep yer cosmic doubloons in check across the seven star systems!</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="treasure-card card p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="doubloon">🏴‍☠️ Welcome Aboard, Captain! 🏴‍☠️</h2>
+                        <p class="lead text-light">
+                            Avast, ye savvy space buccaneer! Time to manage that treasure chest 
+                            like the legendary pirate captain ye be. From asteroid mining profits 
+                            to hyperspace fuel costs, we'll keep yer finances shipshape!
+                        </p>
+                    </div>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <div class="card bg-warning text-dark">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-safe" style="font-size: 2rem;"></i>
+                                    <h4 class="mt-2">1,247,000</h4>
+                                    <p class="mb-0">Cosmic Doubloons</p>
+                                    <small>Main Treasure Vault</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-danger text-white">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-fuel-pump" style="font-size: 2rem;"></i>
+                                    <h4 class="mt-2">-89,500</h4>
+                                    <p class="mb-0">Hyperspace Fuel</p>
+                                    <small>This Quarter</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-success text-white">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-gem" style="font-size: 2rem;"></i>
+                                    <h4 class="mt-2">+340,000</h4>
+                                    <p class="mb-0">Last Raid Profit</p>
+                                    <small>Zeta Quadrant</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h4 class="doubloon">⚔️ Recent Expeditions</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent text-light border-warning">
+                                    <i class="bi bi-check-circle text-success"></i> Nebula Mining Operation: +50,000 doubloons
+                                </li>
+                                <li class="list-group-item bg-transparent text-light border-warning">
+                                    <i class="bi bi-x-circle text-danger"></i> Ship Repairs (Plasma cannon): -15,000 doubloons
+                                </li>
+                                <li class="list-group-item bg-transparent text-light border-warning">
+                                    <i class="bi bi-check-circle text-success"></i> Cargo Escort Mission: +25,000 doubloons
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="doubloon">🚀 Upcoming Expenses</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent text-light border-warning">
+                                    <i class="bi bi-wrench"></i> Ship Maintenance: 20,000 doubloons
+                                </li>
+                                <li class="list-group-item bg-transparent text-light border-warning">
+                                    <i class="bi bi-people"></i> Crew Wages: 35,000 doubloons
+                                </li>
+                                <li class="list-group-item bg-transparent text-light border-warning">
+                                    <i class="bi bi-shield"></i> Insurance Premium: 12,000 doubloons
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning text-dark text-center">
+                        <h5><i class="bi bi-exclamation-triangle"></i> Captain's Log Reminder:</h5>
+                        <p class="mb-0">
+                            "Arrr! Remember to set aside 15% of yer plunder for the 
+                            Intergalactic Pirate Retirement Fund. Even space pirates need to plan fer their golden years!"
+                        </p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="../index.html" class="btn btn-outline-warning me-2">
+                            <i class="bi bi-arrow-left"></i> Back to Port
+                        </a>
+                        <button class="btn btn-warning text-dark">
+                            <i class="bi bi-plus-circle"></i> Plan New Expedition
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

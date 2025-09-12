@@ -32,10 +32,13 @@ env.bak/
 venv.bak/
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo
+
+# VS Code user-specific settings (keep shared workspace settings)
+.vscode/settings_local.json
+.vscode/*.code-workspace
 
 # Configuration files with sensitive data
 config.yaml

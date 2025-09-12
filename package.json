@@ -1,0 +1,12 @@
+{
+  "name": "opendemos",
+  "version": "1.0.0",
+  "description": "Various project demos in browsers (html, etc..)",
+  "main": "generate-index.js",
+  "scripts": {
+    "generate": "node generate-index.js",
+    "build-index": "node generate-index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,48 @@
+# Google Workspace Configuration
+google:
+  # Scopes for Google APIs
+  scopes:
+    - https://www.googleapis.com/auth/documents
+    - https://www.googleapis.com/auth/drive
+    - https://www.googleapis.com/auth/drive.file
+  
+  # Credentials file path (relative to project root)
+  credentials_file: credentials.json
+  
+  # Token file path (relative to project root)
+  token_file: token.json
+
+# HTML Management Settings
+html_manager:
+  # Directory to store HTML exports
+  export_directory: html_exports
+  
+  # Maximum file size for uploads (in MB)
+  max_file_size: 10
+  
+  # Supported HTML file extensions
+  supported_extensions:
+    - .html
+    - .htm
+  
+  # Default sharing permissions for Google Drive
+  default_sharing:
+    type: anyone
+    role: reader
+
+# Web Interface Settings
+web_interface:
+  host: localhost
+  port: 5000
+  debug: false
+  
+# Conversion Settings
+conversion:
+  # Whether to preserve original formatting
+  preserve_formatting: true
+  
+  # Convert images to base64 for Google Docs
+  convert_images: true
+  
+  # Maximum document size for Google Docs (characters)
+  max_doc_size: 1000000

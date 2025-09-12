@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="display-6 mb-3">
+            <i class="bi bi-google"></i> Google Drive Integration
+        </h1>
+        <p class="lead text-muted">Manage your HTML files in Google Drive and convert to Google Docs</p>
+    </div>
+</div>
+
+{% if not authenticated %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card border-warning">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-exclamation-triangle"></i> Google Workspace Setup Required
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>To use Google Drive integration, you need to set up authentication:</p>
+                <ol>
+                    <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                    <li>Create a new project or select an existing one</li>
+                    <li>Enable Google Drive API and Google Docs API</li>
+                    <li>Create OAuth 2.0 credentials for Desktop application</li>
+                    <li>Download the credentials JSON file as <code>credentials.json</code></li>
+                    <li>Run the setup command: <code>python scripts/gemini_manager.py setup</code></li>
+                </ol>
+                
+                <div class="mt-3">
+                    <a href="https://console.cloud.google.com/" target="_blank" class="btn btn-primary">
+                        <i class="bi bi-cloud"></i> Go to Google Cloud Console
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row mb-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-cloud-check"></i> Google Drive Files
+                </h5>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-sm" onclick="batchUploadToDrive()">
+                        <i class="bi bi-cloud-upload"></i> Upload All Local Files
+                    </button>
+                    <button type="button" class="btn btn-info btn-sm" onclick="refreshDriveFiles()">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if files %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Size</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="driveFilesTable">
+                                {% for file in files %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            {% if 'document' in file.mimeType %}
+                                                <i class="bi bi-file-text text-info me-2"></i>
+                                            {% else %}
+                                                <i class="bi bi-file-earmark-code text-primary me-2"></i>
+                                            {% endif %}
+                                            <span>{{ file.name[:40] }}{% if file.name|length > 40 %}...{% endif %}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {% if 'document' in file.mimeType %}
+                                            <span class="badge bg-info">Google Doc</span>
+                                        {% elif 'text/html' in file.mimeType %}
+                                            <span class="badge bg-primary">HTML</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ file.mimeType.split('.')[-1] }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if file.size %}
+                                            {{ "%.2f"|format(file.size|int / 1024 / 1024) }} MB
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ file.createdTime[:19] if file.createdTime else 'N/A' }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ file.webViewLink }}" target="_blank" class="btn btn-outline-primary">
+                                                <i class="bi bi-eye"></i> View
+                                            </a>
+                                            <button class="btn btn-outline-secondary" onclick="copyLink('{{ file.webViewLink }}')">
+                                                <i class="bi bi-link"></i> Copy Link
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-cloud text-muted" style="font-size: 3rem;"></i>
+                        <h4 class="text-muted mt-3">No files in Google Drive</h4>
+                        <p class="text-muted">Upload your first HTML file to get started</p>
+                        <a href="{{ url_for('list_files') }}" class="btn btn-primary">
+                            <i class="bi bi-upload"></i> Upload Files
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-lightning"></i> Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-success" onclick="batchUploadToDrive()">
+                        <i class="bi bi-cloud-upload"></i> Upload All Local Files as HTML
+                    </button>
+                    <button type="button" class="btn btn-info" onclick="batchConvertToDocs()">
+                        <i class="bi bi-file-text"></i> Convert All to Google Docs
+                    </button>
+                    <a href="{{ url_for('list_files') }}" class="btn btn-outline-primary">
+                        <i class="bi bi-files"></i> Manage Local Files
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-share"></i> Sharing Options
+                </h5>
+            </div>
+            <div class="card-body">
+                <h6>Export Options:</h6>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-check-circle text-success"></i> Direct HTML links for viewing</li>
+                    <li><i class="bi bi-check-circle text-success"></i> Google Docs for collaboration</li>
+                    <li><i class="bi bi-check-circle text-success"></i> Public sharing with colleagues</li>
+                    <li><i class="bi bi-check-circle text-success"></i> Download original files</li>
+                </ul>
+                
+                <div class="mt-3">
+                    <small class="text-muted">
+                        All files are automatically shared with "anyone with link can view" permissions.
+                        You can change this in Google Drive settings.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Progress Modal -->
+<div class="modal fade" id="progressModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Processing...</h5>
+            </div>
+            <div class="modal-body">
+                <div class="progress mb-3">
+                    <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%">0%</div>
+                </div>
+                <div id="progressText">Starting...</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function showProgress(title) {
+    document.querySelector('#progressModal .modal-title').textContent = title;
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('progressBar').textContent = '0%';
+    document.getElementById('progressText').textContent = 'Starting...';
+    
+    const modal = new bootstrap.Modal(document.getElementById('progressModal'));
+    modal.show();
+    return modal;
+}
+
+function updateProgress(percent, text) {
+    document.getElementById('progressBar').style.width = percent + '%';
+    document.getElementById('progressBar').textContent = Math.round(percent) + '%';
+    document.getElementById('progressText').textContent = text;
+}
+
+function batchUploadToDrive() {
+    if (!confirm('Upload all local HTML files to Google Drive? This may take a while.')) {
+        return;
+    }
+    
+    const modal = showProgress('Batch Uploading to Google Drive');
+    updateProgress(10, 'Starting batch upload...');
+    
+    fetch('/api/batch_upload_to_drive', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ convert: false })
+    })
+    .then(response => response.json())
+    .then(data => {
+        modal.hide();
+        if (data.total_files > 0) {
+            alert(`Batch upload completed!\n\nTotal files: ${data.total_files}\nSuccessful uploads: ${data.successful_uploads}`);
+            refreshDriveFiles();
+        } else {
+            alert('No local files found to upload');
+        }
+    })
+    .catch(error => {
+        modal.hide();
+        alert(`Batch upload failed: ${error}`);
+    });
+}
+
+function batchConvertToDocs() {
+    if (!confirm('Convert all local HTML files to Google Docs? This may take a while.')) {
+        return;
+    }
+    
+    const modal = showProgress('Converting to Google Docs');
+    updateProgress(10, 'Starting batch conversion...');
+    
+    fetch('/api/batch_upload_to_drive', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ convert: true })
+    })
+    .then(response => response.json())
+    .then(data => {
+        modal.hide();
+        if (data.total_files > 0) {
+            alert(`Batch conversion completed!\n\nTotal files: ${data.total_files}\nSuccessful conversions: ${data.successful_uploads}`);
+            refreshDriveFiles();
+        } else {
+            alert('No local files found to convert');
+        }
+    })
+    .catch(error => {
+        modal.hide();
+        alert(`Batch conversion failed: ${error}`);
+    });
+}
+
+function refreshDriveFiles() {
+    location.reload();
+}
+
+function copyLink(link) {
+    navigator.clipboard.writeText(link).then(function() {
+        // Create a temporary toast notification
+        const toast = document.createElement('div');
+        toast.className = 'toast align-items-center text-white bg-success border-0 position-fixed';
+        toast.style.top = '20px';
+        toast.style.right = '20px';
+        toast.style.zIndex = '9999';
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle"></i> Link copied to clipboard!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        `;
+        
+        document.body.appendChild(toast);
+        const toastBootstrap = new bootstrap.Toast(toast);
+        toastBootstrap.show();
+        
+        // Remove the toast after it's hidden
+        toast.addEventListener('hidden.bs.toast', function() {
+            document.body.removeChild(toast);
+        });
+    }, function(err) {
+        alert('Failed to copy link: ' + err);
+    });
+}
+</script>
+{% endblock %}

@@ -1,2 +1,230 @@
-# opendemos
-Various project demos in browsers (html, etc..)
+# Gemini HTML Manager
+
+A comprehensive solution for managing, storing, and sharing HTML exports from Google Gemini with seamless Google Workspace integration.
+
+## 🌟 Features
+
+- **📁 Local HTML File Management**: Organize and manage dozens of HTML files from Google Gemini exports
+- **☁️ Google Drive Integration**: Upload HTML files to Google Drive with automatic sharing
+- **📄 Google Docs Conversion**: Convert HTML files to Google Docs for collaborative editing
+- **🔍 Advanced Search**: Search files by filename, title, or content
+- **🌐 Web Interface**: Modern web interface for easy file management
+- **⚡ CLI Tools**: Command-line interface for automation and batch operations
+- **🔄 Batch Operations**: Upload multiple files at once, cleanup duplicates
+- **📊 Analytics**: File statistics and organization by date
+
+## 🚀 Quick Start
+
+### 1. Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Esteve32/opendemos.git
+cd opendemos
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### 2. Setup Google Workspace Integration
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing one
+3. Enable **Google Drive API** and **Google Docs API**
+4. Create **OAuth 2.0 Client ID** for Desktop application
+5. Download credentials as `credentials.json` in the project root
+6. Run setup:
+
+```bash
+python scripts/gemini_manager.py setup
+```
+
+### 3. Start Using
+
+**Web Interface:**
+```bash
+python scripts/gemini_manager.py web
+# Open http://localhost:5000
+```
+
+**Command Line:**
+```bash
+# Import HTML file
+python scripts/gemini_manager.py import-file path/to/your/file.html
+
+# Upload to Google Drive
+python scripts/gemini_manager.py upload path/to/file.html --convert
+
+# Batch operations
+python scripts/gemini_manager.py batch-upload
+```
+
+## 📋 Usage Guide
+
+### Managing HTML Files
+
+#### Import Files
+- **Web Interface**: Use the Upload page to drag & drop or select files
+- **CLI**: `python scripts/gemini_manager.py import-file <path> --name "new-name"`
+
+#### View and Organize
+- Files are automatically organized by date
+- Search functionality for quick finding
+- Metadata extraction (title, word count, images, etc.)
+
+### Google Workspace Integration
+
+#### Upload to Google Drive
+- Files are uploaded to "Gemini HTML Exports" folder
+- Automatic public sharing (anyone with link can view)
+- Preserves original formatting
+
+#### Convert to Google Docs
+- HTML content converted to editable Google Docs
+- Maintains structure and formatting where possible
+- Enables collaborative editing and comments
+
+### Batch Operations
+
+#### Upload Multiple Files
+```bash
+# Upload all files in export directory
+python scripts/gemini_manager.py batch-upload
+
+# Upload from specific directory
+python scripts/gemini_manager.py batch-upload --directory /path/to/html/files
+
+# Convert all to Google Docs
+python scripts/gemini_manager.py batch-upload --convert
+```
+
+#### Cleanup and Maintenance
+```bash
+# Remove duplicate files
+python scripts/gemini_manager.py cleanup
+
+# Export file list
+python scripts/gemini_manager.py export-list --format csv
+```
+
+## 🔧 Configuration
+
+Copy `config.example.yaml` to `config.yaml` and customize:
+
+```yaml
+google:
+  scopes:
+    - https://www.googleapis.com/auth/documents
+    - https://www.googleapis.com/auth/drive
+  credentials_file: credentials.json
+
+html_manager:
+  export_directory: html_exports
+  max_file_size: 10  # MB
+  default_sharing:
+    type: anyone
+    role: reader
+
+web_interface:
+  host: localhost
+  port: 5000
+  debug: false
+```
+
+## 📖 API Reference
+
+### REST API Endpoints
+
+- `GET /api/search?q=query` - Search files
+- `POST /api/upload_to_drive` - Upload single file to Google Drive
+- `POST /api/batch_upload_to_drive` - Batch upload to Google Drive
+- `GET /api/file_metadata/<filename>` - Get file metadata
+- `POST /api/cleanup_duplicates` - Remove duplicate files
+
+### CLI Commands
+
+```bash
+# File management
+python scripts/gemini_manager.py import-file <path>
+python scripts/gemini_manager.py list-files
+python scripts/gemini_manager.py search <query>
+
+# Google Drive integration
+python scripts/gemini_manager.py upload <file> [--convert]
+python scripts/gemini_manager.py batch-upload [--directory <path>] [--convert]
+python scripts/gemini_manager.py list-drive-files
+
+# Maintenance
+python scripts/gemini_manager.py cleanup
+python scripts/gemini_manager.py export-list [--format csv|json]
+```
+
+## 💡 Use Cases
+
+### For Individual Users
+- Store and organize Gemini Canvas exports
+- Share infographics with colleagues
+- Convert presentations to collaborative docs
+- Archive important AI-generated content
+
+### For Teams
+- Centralized repository of AI-generated materials
+- Collaborative editing of Gemini outputs
+- Standardized sharing workflows
+- Team knowledge base from AI interactions
+
+### For Organizations
+- Systematic management of AI-generated content
+- Integration with existing Google Workspace workflows
+- Bulk processing of AI outputs
+- Long-term archival and searchability
+
+## 🛠️ Development
+
+### Project Structure
+```
+opendemos/
+├── gemini_html_manager/     # Core Python package
+│   ├── __init__.py
+│   ├── config.py           # Configuration management
+│   ├── file_manager.py     # Local file operations
+│   ├── google_workspace.py # Google APIs integration
+│   └── web_interface.py    # Flask web app
+├── scripts/
+│   └── gemini_manager.py   # CLI interface
+├── templates/              # Web interface templates
+├── html_exports/           # Local HTML file storage
+├── docs/                   # Documentation
+├── requirements.txt        # Python dependencies
+└── config.example.yaml     # Configuration template
+```
+
+### Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is open source. Feel free to use, modify, and distribute according to your needs.
+
+## 🤝 Support
+
+- **Issues**: Report bugs or request features on GitHub Issues
+- **Documentation**: Check the `docs/` directory for detailed guides
+- **Community**: Share your use cases and tips
+
+## 🔮 Roadmap
+
+- [ ] Support for more file formats (PDF, DOCX)
+- [ ] Advanced analytics and reporting
+- [ ] Integration with other cloud storage providers
+- [ ] Mobile-friendly web interface
+- [ ] Automated content analysis and tagging
+- [ ] Webhook support for automated workflows
+
+---
+
+**Made for managing Google Gemini exports with ❤️**

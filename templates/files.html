@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="display-6 mb-3">
+            <i class="bi bi-files"></i> HTML Files
+        </h1>
+        <p class="lead text-muted">Manage your Google Gemini HTML exports</p>
+    </div>
+</div>
+
+<!-- Search and Filters -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <form method="GET" class="d-flex">
+            <input type="text" name="search" class="form-control" placeholder="Search files by name, title, or content..." value="{{ search_query }}">
+            <button type="submit" class="btn btn-primary ms-2">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div class="btn-group w-100">
+            <button type="button" class="btn btn-success" onclick="batchUploadToDrive()">
+                <i class="bi bi-cloud-upload"></i> Batch Upload
+            </button>
+            <button type="button" class="btn btn-warning" onclick="cleanupDuplicates()">
+                <i class="bi bi-trash"></i> Cleanup
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Files List -->
+<div class="row">
+    {% if files %}
+        {% for file in files %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card file-item h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <small class="text-muted">{{ file.created_time[:10] }}</small>
+                    {% if file.is_gemini_canvas %}
+                        <span class="badge gemini-badge">Gemini Canvas</span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <i class="bi bi-file-earmark-code text-primary me-2"></i>
+                        {{ file.filename[:30] }}{% if file.filename|length > 30 %}...{% endif %}
+                    </h6>
+                    {% if file.title %}
+                        <p class="card-text text-muted">{{ file.title[:50] }}{% if file.title|length > 50 %}...{% endif %}</p>
+                    {% endif %}
+                    
+                    <div class="row text-center mb-3">
+                        <div class="col-4">
+                            <small class="text-muted">Size</small><br>
+                            <strong>{{ "%.2f"|format(file.size_mb) }} MB</strong>
+                        </div>
+                        <div class="col-4">
+                            <small class="text-muted">Words</small><br>
+                            <strong>{{ file.word_count }}</strong>
+                        </div>
+                        <div class="col-4">
+                            <small class="text-muted">Media</small><br>
+                            {% if file.has_images %}<i class="bi bi-image text-success"></i>{% endif %}
+                            {% if file.has_links %}<i class="bi bi-link text-info"></i>{% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group w-100">
+                        <a href="{{ url_for('view_file', filename=file.filename) }}" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-eye"></i> View
+                        </a>
+                        <button class="btn btn-outline-success btn-sm" onclick="uploadToDrive('{{ file.path }}', '{{ file.filename }}', false)">
+                            <i class="bi bi-cloud-upload"></i> Upload
+                        </button>
+                        <button class="btn btn-outline-info btn-sm" onclick="uploadToDrive('{{ file.path }}', '{{ file.filename }}', true)">
+                            <i class="bi bi-file-text"></i> Convert
+                        </button>
+                        <a href="{{ url_for('download_file', filename=file.filename) }}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="text-center py-5">
+                <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+                <h3 class="text-muted mt-3">
+                    {% if search_query %}
+                        No files found matching "{{ search_query }}"
+                    {% else %}
+                        No HTML files found
+                    {% endif %}
+                </h3>
+                <p class="text-muted">
+                    {% if search_query %}
+                        <a href="{{ url_for('list_files') }}" class="btn btn-primary">Clear Search</a>
+                    {% else %}
+                        <a href="{{ url_for('upload_file') }}" class="btn btn-primary">Upload your first file</a>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Progress Modal -->
+<div class="modal fade" id="progressModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Processing...</h5>
+            </div>
+            <div class="modal-body">
+                <div class="progress mb-3">
+                    <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%">0%</div>
+                </div>
+                <div id="progressText">Starting...</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function showProgress(title) {
+    document.querySelector('#progressModal .modal-title').textContent = title;
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('progressBar').textContent = '0%';
+    document.getElementById('progressText').textContent = 'Starting...';
+    
+    const modal = new bootstrap.Modal(document.getElementById('progressModal'));
+    modal.show();
+    return modal;
+}
+
+function updateProgress(percent, text) {
+    document.getElementById('progressBar').style.width = percent + '%';
+    document.getElementById('progressBar').textContent = Math.round(percent) + '%';
+    document.getElementById('progressText').textContent = text;
+}
+
+function uploadToDrive(filePath, filename, convert = false) {
+    const action = convert ? 'Converting and uploading' : 'Uploading';
+    const modal = showProgress(`${action} to Google Drive`);
+    updateProgress(25, `${action} ${filename}...`);
+    
+    fetch('/api/upload_to_drive', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            file_path: filePath,
+            title: filename,
+            convert: convert
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        modal.hide();
+        if (data.success) {
+            const fileType = convert ? 'Google Doc' : 'HTML file';
+            alert(`Successfully uploaded ${filename} as ${fileType}!\n\nView at: ${data.link}`);
+        } else {
+            alert(`Upload failed: ${data.error}`);
+        }
+    })
+    .catch(error => {
+        modal.hide();
+        alert(`Upload failed: ${error}`);
+    });
+}
+
+function batchUploadToDrive() {
+    if (!confirm('Upload all files to Google Drive? This may take a while.')) {
+        return;
+    }
+    
+    const modal = showProgress('Batch Uploading to Google Drive');
+    updateProgress(10, 'Starting batch upload...');
+    
+    fetch('/api/batch_upload_to_drive', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        modal.hide();
+        if (data.total_files > 0) {
+            alert(`Batch upload completed!\n\nTotal files: ${data.total_files}\nSuccessful uploads: ${data.successful_uploads}`);
+            if (data.successful_uploads > 0) {
+                location.reload();
+            }
+        } else {
+            alert('No files found to upload');
+        }
+    })
+    .catch(error => {
+        modal.hide();
+        alert(`Batch upload failed: ${error}`);
+    });
+}
+
+function cleanupDuplicates() {
+    if (!confirm('Remove duplicate files? This action cannot be undone.')) {
+        return;
+    }
+    
+    const modal = showProgress('Cleaning up duplicates');
+    updateProgress(50, 'Scanning for duplicates...');
+    
+    fetch('/api/cleanup_duplicates', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        modal.hide();
+        if (data.count > 0) {
+            alert(`Removed ${data.count} duplicate files:\n\n${data.removed_files.join('\n')}`);
+            location.reload();
+        } else {
+            alert('No duplicates found');
+        }
+    })
+    .catch(error => {
+        modal.hide();
+        alert(`Cleanup failed: ${error}`);
+    });
+}
+</script>
+{% endblock %}

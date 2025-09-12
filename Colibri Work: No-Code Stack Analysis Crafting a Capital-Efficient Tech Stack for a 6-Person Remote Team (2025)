@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colibri Work No-Code Stack Analysis 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#0047AB]">Colibri Work: No-Code Stack Analysis</h1>
+            <p class="text-lg text-slate-600 mt-2">Crafting a Capital-Efficient Tech Stack for a 6-Person Remote Team (2025)</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="lg:col-span-3 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#0047AB] mb-4">Executive Summary & Recommended Stack</h2>
+                <p class="mb-4">This analysis confirms your preference for a flexible, Notion-centric stack is a highly effective and cost-efficient strategy. The recommended stack strongly aligns with your requirements for UI/UX, macOS compatibility, and deep integration, while offering the "chaordic" balance you seek. It prioritizes best-in-class tools for specific functions (e.g., Folk for CRM, Fathom for meeting intelligence) over a monolithic solution like HubSpot, yielding significant cost savings and better workflow alignment.</p>
+                <div class="bg-blue-100 border-l-4 border-[#0047AB] text-blue-800 p-4 rounded-md">
+                    <p class="font-bold text-lg">Total Estimated Annual Cost (Recommended Stack):</p>
+                    <p class="text-3xl font-bold">$7,283</p>
+                    <p class="text-sm">This represents a TCO that is approximately <strong>41x more capital-efficient</strong> in the first year compared to hiring a single mid-level full-stack developer in Europe.</p>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-3 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#0047AB] mb-4">1. Total Cost of Ownership (TCO): Year 1 Comparison</h2>
+                <p class="mb-4 text-slate-600">The primary goal is capital efficiency. This chart visualizes the stark difference in first-year investment between building a custom solution, adopting an all-in-one platform like HubSpot, and assembling a curated no-code stack. The curated stack provides immense savings, freeing up capital for other business areas.</p>
+                <div class="chart-container h-96 max-h-[500px]">
+                    <canvas id="tcoChart"></canvas>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#0047AB] mb-4">2. Core Platform Showdown: PM & CRM</h2>
+                 <p class="mb-4 text-slate-600">This comparison scores the leading contenders against your most critical requirements. While Motion offers powerful AI scheduling, its PM features are less flexible than Notion's. HubSpot is a sales powerhouse but is costly and less adaptable for holistic project management. Notion, paired with Folk, emerges as the winner, offering superior flexibility, UI/UX, and cost-effectiveness.</p>
+                <div class="chart-container h-96 max-h-[500px]">
+                    <canvas id="featureRadarChart"></canvas>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1 bg-white rounded-lg shadow-md p-6 flex flex-col justify-center">
+                 <h2 class="text-2xl font-bold text-[#0047AB] mb-4">3. Platform Feature Analysis</h2>
+                <ul class="space-y-4 text-slate-700">
+                    <li><strong class="text-[#0047AB]">Notion:</strong> Your assessment is correct. Upgrading to the Business Plan is the right move. It provides the necessary collaboration features and API access for integrations, serving as the central "operating system" for project management and knowledge. Its calendar sync requires a third-party tool like 2sync for true two-way updates with dependencies, a minor trade-off for its immense flexibility.</li>
+                    <li><strong class="text-[#0047AB]">Folk CRM:</strong> I agree with your choice over HubSpot. Folk's native integrations with LinkedIn (via folkX extension) and its WhatsApp CRM capabilities are modern and perfectly suited for your multi-channel outreach. Its UI is clean, intuitive, and the Kanban view for recruiting pipelines meets your exact needs.</li>
+                     <li><strong class="text-[#0047AB]">Kanbanchi:</strong> Disagree. While its integration with Google Workspace is deep, its calendar sync is only <strong class="text-red-600">one-way</strong>. Changes in Google Calendar do not reflect back in Kanbanchi, which fails your critical two-way sync and dependency requirement. Notion with an integration partner is a better solution.</li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-3 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#0047AB] mb-4">4. Recommended Stack: Detailed Breakdown & Annual Cost</h2>
+                 <p class="mb-4 text-slate-600">This table details the recommended tools, seat allocation based on your team's roles, and the estimated annual cost. The selection prioritizes your requirements for macOS compatibility, seamless integration, and a superior user experience with minimal training overhead for a team accustomed to Google Workspace.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="p-3 font-semibold">Tool</th>
+                                <th class="p-3 font-semibold">Purpose</th>
+                                <th class="p-3 font-semibold">Plan</th>
+                                <th class="p-3 font-semibold">Seats</th>
+                                <th class="p-3 font-semibold text-right">Annual Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3 font-medium">Notion</td>
+                                <td class="p-3">Core PM, CRM, Wiki</td>
+                                <td class="p-3">Business Plan</td>
+                                <td class="p-3">6</td>
+                                <td class="p-3 text-right">$1,440</td>
+                            </tr>
+                            <tr class="border-b bg-slate-50">
+                                <td class="p-3 font-medium">Folk</td>
+                                <td class="p-3">Recruiting & Sales CRM</td>
+                                <td class="p-3">Premium</td>
+                                <td class="p-3">3</td>
+                                <td class="p-3 text-right">$1,440</td>
+                            </tr>
+                             <tr class="border-b">
+                                <td class="p-3 font-medium">Sales Navigator</td>
+                                <td class="p-3">LinkedIn Prospecting</td>
+                                <td class="p-3">Advanced (Team)</td>
+                                <td class="p-3">3</td>
+                                <td class="p-3 text-right">$2,880</td>
+                            </tr>
+                            <tr class="border-b bg-slate-50">
+                                <td class="p-3 font-medium">Fathom</td>
+                                <td class="p-3">Meeting Intelligence & Notes</td>
+                                <td class="p-3">Team Edition</td>
+                                <td class="p-3">4</td>
+                                <td class="p-3 text-right">$912</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-medium">Riverside.fm</td>
+                                <td class="p-3">High-Quality Recording</td>
+                                <td class="p-3">Pro Plan</td>
+                                <td class="p-3">1</td>
+                                <td class="p-3 text-right">$288</td>
+                            </tr>
+                             <tr class="border-b bg-slate-50">
+                                <td class="p-3 font-medium">1Password</td>
+                                <td class="p-3">Password Management</td>
+                                <td class="p-3">Teams Starter Pack</td>
+                                <td class="p-3">1 (for 6 users)</td>
+                                <td class="p-3 text-right">$240</td>
+                            </tr>
+                             <tr class="border-b">
+                                <td class="p-3 font-medium">n8n.io</td>
+                                <td class="p-3">Workflow Automation</td>
+                                <td class="p-3">Pro Plan</td>
+                                <td class="p-3">1 (for 2 users)</td>
+                                <td class="p-3 text-right">$600</td>
+                            </tr>
+                              <tr class="border-b bg-slate-50">
+                                <td class="p-3 font-medium">Motion (Test)</td>
+                                <td class="p-3">Agentic AI Testing</td>
+                                <td class="p-3">Team Plan</td>
+                                <td class="p-3">3</td>
+                                <td class="p-3 text-right">$432</td>
+                            </tr>
+                            <tr class="bg-blue-100 font-bold">
+                                <td class="p-3" colspan="4">Total Estimated Annual TCO</td>
+                                <td class="p-3 text-right text-xl">$7,672</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <p class="mt-4 text-sm text-slate-500">*Note: Prices are based on annual billing for maximum savings as of late 2025. Sales Navigator pricing is estimated as official team pricing can vary. Motion is included for testing as requested.</p>
+            </div>
+
+        </main>
+    </div>
+
+<script>
+    function wrapLabels(labels, maxLength) {
+        return labels.map(label => {
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        });
+    }
+
+    const tooltipTitleCallback = {
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                          return label.join(' ');
+                        } else {
+                          return label;
+                        }
+                    }
+                }
+            }
+        }
+    };
+    
+    const palette = {
+        name: 'Brilliant Blues & Energetic Tones',
+        blue: '#0047AB',
+        cobalt: '#002244',
+        sky: '#87CEEB',
+        orange: '#FFA500',
+        slate: '#64748b',
+        lightGray: '#f1f5f9'
+    };
+
+    const tcoCtx = document.getElementById('tcoChart').getContext('2d');
+    const tcoChart = new Chart(tcoCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Recommended Stack', 'HubSpot Sales & Mkt Hub Pro', 'Mid-Level Full-Stack Dev (1)'],
+            datasets: [{
+                label: 'First Year Total Cost of Ownership (USD)',
+                data: [7672, 21600, 85000],
+                backgroundColor: [palette.blue, palette.orange, palette.cobalt],
+                borderColor: [palette.blue, palette.orange, palette.cobalt],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + new Intl.NumberFormat().format(value);
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: tooltipTitleCallback.plugins.tooltip
+            }
+        }
+    });
+
+    const radarCtx = document.getElementById('featureRadarChart').getContext('2d');
+    const featureRadarChart = new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+            labels: wrapLabels(['Great UI/UX', 'Two-Way GCal Sync', 'PM Dependencies', 'CRM LinkedIn/WA Sync', 'Chaordic Customization', 'Cost-Effectiveness'], 16),
+            datasets: [
+                {
+                    label: 'Notion + Folk',
+                    data: [9, 7, 7, 8, 9, 9],
+                    borderColor: palette.blue,
+                    backgroundColor: 'rgba(0, 71, 171, 0.2)',
+                    pointBackgroundColor: palette.blue,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: palette.blue
+                },
+                {
+                    label: 'HubSpot',
+                    data: [7, 8, 6, 9, 6, 5],
+                    borderColor: palette.orange,
+                    backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                    pointBackgroundColor: palette.orange,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: palette.orange
+                },
+                {
+                    label: 'Motion',
+                    data: [8, 9, 8, 3, 5, 7],
+                    borderColor: palette.cobalt,
+                    backgroundColor: 'rgba(0, 34, 68, 0.2)',
+                    pointBackgroundColor: palette.cobalt,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: palette.cobalt
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { display: true },
+                    suggestedMin: 0,
+                    suggestedMax: 10,
+                    pointLabels: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            },
+            plugins: {
+               tooltip: tooltipTitleCallback.plugins.tooltip,
+               legend: {
+                   position: 'top',
+               }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

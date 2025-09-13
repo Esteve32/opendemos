@@ -1,0 +1,269 @@
+<!-- Chosen Palette: Brilliant Blues -->
+<!-- Application Structure Plan: The SPA is structured as a top-to-bottom narrative guiding the user from problem to solution to action. It begins with a "Hook" (The Current Problem), introduces the "Solution" (Folk CRM), details the "3-Step Action Plan" in visually distinct cards, and concludes with "The Result" (a unified workflow). This linear, storytelling structure was chosen because the source material is a sequential plan. It's the most intuitive way for a user to absorb a step-by-step guide, making it more digestible and actionable than a non-linear dashboard. Key interactions are limited to scrolling to maintain focus on the narrative. -->
+<!-- Visualization & Content Choices: 1. Initial Stack (Problem): Report Info -> The disconnected nature of Google, Notion, LinkedIn. Goal -> Inform. Viz/Method -> Icon-like blocks for each tool with visual gaps. Interaction -> None. Justification -> Instantly communicates the core problem without text. Method -> HTML/CSS with Tailwind (NO SVG). 2. Key Benefit (Solution): Report Info -> Folk as the "Action Layer". Goal -> Inform. Viz/Method -> Large text callout. Interaction -> None. Justification -> Creates a strong focal point for the solution. Method -> HTML/CSS (NO SVG). 3. Step 2 Workflow: Report Info -> Defining roles for Folk, Notion, and Google. Goal -> Organize/Show Relationships. Viz/Method -> A custom flowchart diagram. Interaction -> None. Justification -> A flowchart is the clearest way to explain a process and the relationship between different tools, which is the core of this step. Method -> HTML divs and borders styled with Tailwind (NO SVG/Mermaid). 4. Step 3 Onboarding: Report Info -> The onboarding timeline. Goal -> Organize/Show Change. Viz/Method -> A simple horizontal timeline. Interaction -> None. Justification -> A timeline is the universally understood format for sequential events. Method -> HTML/CSS with Tailwind (NO SVG). -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Plan: Integrating Folk CRM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F2F2F2;
+            color: #003F5C;
+        }
+        .brand-header { color: #003F5C; }
+        .brand-subheader { color: #366E8A; }
+        .brand-accent-bg { background-color: #7CB5D3; }
+        .brand-accent-text { color: #7CB5D3; }
+        .brand-card-bg { background-color: #ffffff; }
+        .brand-highlight-bg { background-color: #C1E7FF; }
+        .flowchart-box {
+            border: 2px solid #7CB5D3;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+        }
+        .flowchart-arrow {
+            position: relative;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 4rem;
+            width: 100%;
+        }
+        .flowchart-arrow::after {
+            content: '▼';
+            font-size: 2rem;
+            color: #366E8A;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2.5rem;
+            border-left: 3px solid #7CB5D3;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -11px;
+            top: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #366E8A;
+            border-radius: 50%;
+            border: 3px solid #F2F2F2;
+        }
+        .timeline-item:last-child {
+            border-left: 3px solid transparent;
+        }
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto px-4 py-8 md:py-12">
+
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold brand-header">Integrating Folk CRM</h1>
+            <p class="mt-4 text-lg md:text-xl brand-subheader max-w-3xl mx-auto">An Actionable Guide to Augmenting Your Notion & Google Stack for a Unified Startup Workflow</p>
+        </header>
+
+        <main class="space-y-16">
+            <section id="problem">
+                <h2 class="text-3xl font-bold text-center brand-header mb-8">The Starting Point: A Disconnected Stack</h2>
+                <p class="text-center brand-subheader max-w-2xl mx-auto mb-10">Your current tools are powerful, but manual data transfer between them creates friction and slows you down. This plan introduces an "Action Layer" to unite your workflow.</p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center">
+                    <div class="p-6 rounded-lg brand-card-bg shadow-md w-48 h-24 flex items-center justify-center">
+                        <span class="text-xl font-bold">📄 Notion</span>
+                    </div>
+                    <span class="text-4xl font-bold brand-accent-text">+</span>
+                     <div class="p-6 rounded-lg brand-card-bg shadow-md w-48 h-24 flex items-center justify-center">
+                        <span class="text-xl font-bold">✉️ Google</span>
+                    </div>
+                    <span class="text-4xl font-bold brand-accent-text">+</span>
+                    <div class="p-6 rounded-lg brand-card-bg shadow-md w-48 h-24 flex items-center justify-center">
+                        <span class="text-xl font-bold">💼 LinkedIn</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="plan" class="space-y-12">
+                <h2 class="text-3xl font-bold text-center brand-header">Your 3-Step Integration Plan</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                    
+                    <div class="brand-card-bg p-6 rounded-xl shadow-lg h-full">
+                        <div class="flex items-center mb-4">
+                             <span class="brand-highlight-bg text-brand-header font-extrabold text-2xl rounded-full w-12 h-12 flex items-center justify-center mr-4">1</span>
+                            <h3 class="text-2xl font-bold brand-header">Data Migration</h3>
+                        </div>
+                        <p class="brand-subheader mb-6">Get your core contacts into Folk quickly to build a foundational database without a massive, time-consuming project.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><span class="brand-accent-text text-2xl mr-3">✓</span><div><strong class="block">Connect Google Workspace:</strong> Instantly sync contacts, emails, and calendar events.</div></li>
+                            <li class="flex items-start"><span class="brand-accent-text text-2xl mr-3">✓</span><div><strong class="block">Import Key Contacts:</strong> Export a CSV from Notion/Sheets of your most critical contacts.</div></li>
+                            <li class="flex items-start"><span class="brand-accent-text text-2xl mr-3">✓</span><div><strong class="block">Install FolkX Extension:</strong> The key to ending manual data entry from LinkedIn for the whole team.</div></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="brand-card-bg p-6 rounded-xl shadow-lg h-full md:col-span-2">
+                        <div class="flex items-center mb-4">
+                            <span class="brand-highlight-bg text-brand-header font-extrabold text-2xl rounded-full w-12 h-12 flex items-center justify-center mr-4">2</span>
+                            <h3 class="text-2xl font-bold brand-header">Define Tool Roles</h3>
+                        </div>
+                        <p class="brand-subheader mb-6">Create a single source of truth by assigning a clear purpose to each tool. This flowchart shows the new, efficient data flow for your team.</p>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+                            <div class="lg:col-span-3">
+                                <div class="flowchart-box"><strong class="text-lg text-purple-700">💼 LinkedIn Contact</strong><br><span class="text-sm">Add with FolkX Extension</span></div>
+                                <div class="flowchart-arrow"></div>
+                                <div class="flowchart-box"><strong class="text-lg brand-header">FOLK: The Action Layer</strong><br><span class="text-sm">Pipelines, Interactions, Outreach, Notes</span></div>
+                                <div class="flowchart-arrow"></div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flowchart-box h-full"><strong class="brand-header">📄 NOTION: Knowledge Base</strong><br><span class="text-sm">Deep Research, Interview Notes, Strategy Docs</span></div>
+                            </div>
+                            <div class="flex items-center justify-center text-center">
+                                <div class="text-center">
+                                    <div class="h-1 w-full bg-gray-200 hidden lg:block"></div>
+                                    <div class="w-1 h-16 bg-gray-200 mx-auto lg:hidden"></div>
+                                    <p class="text-sm brand-subheader font-semibold p-2 bg-gray-50 rounded-md my-2 lg:my-0">🔗 Custom Field:<br>"Notion Link"</p>
+                                    <div class="h-1 w-full bg-gray-200 hidden lg:block"></div>
+                                    <div class="w-1 h-16 bg-gray-200 mx-auto lg:hidden"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flowchart-box h-full"><strong class="brand-header">✉️ GOOGLE: Communication Sync</strong><br><span class="text-sm">Emails & Meetings automatically logged in Folk</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="brand-card-bg p-6 rounded-xl shadow-lg h-full md:col-span-3">
+                         <div class="flex items-center mb-4">
+                            <span class="brand-highlight-bg text-brand-header font-extrabold text-2xl rounded-full w-12 h-12 flex items-center justify-center mr-4">3</span>
+                            <h3 class="text-2xl font-bold brand-header">Team Onboarding & Adoption</h3>
+                        </div>
+                        <p class="brand-subheader mb-8">A tool is only effective if it's used consistently. Follow this simple timeline to ensure team-wide adoption and build the right habits from day one.</p>
+                        <div class="relative">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <h4 class="font-bold text-lg brand-header">30-Minute Kickoff</h4>
+                                <p class="brand-subheader">Demonstrate the core workflow: Add contact from LinkedIn, add a note, and link to the Notion page.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <h4 class="font-bold text-lg brand-header">Establish a "Folk First" Rule</h4>
+                                <p class="brand-subheader">Mandate that all new contact info and interaction notes are logged in Folk to prevent data silos.</p>
+                            </div>
+                             <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <h4 class="font-bold text-lg brand-header">Review Weekly</h4>
+                                <p class="brand-subheader">For the first month, spend 5 minutes in your team meeting sharing a useful interaction logged in Folk. This reinforces the habit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="result" class="text-center bg-white rounded-xl shadow-lg p-8 md:p-12">
+                <h2 class="text-3xl font-bold brand-header mb-4">The Result: A Unified & Scalable Workflow</h2>
+                <p class="text-lg brand-subheader max-w-3xl mx-auto">By connecting your stack with Folk, you eliminate manual work, create a single source of truth for all relationship data, and empower your team to focus on building connections, not on data entry.</p>
+            </section>
+            
+            <section id="share" class="text-center border-t-2 border-gray-200 pt-8 mt-16">
+                 <h2 class="text-2xl font-bold brand-header mb-4">Share & Export This Plan</h2>
+                 <p class="text-lg brand-subheader max-w-3xl mx-auto mb-6">Use the button below to get the full HTML source code for this infographic page, making it easy to host, share, or archive it on GitHub.</p>
+                 <button id="exportBtn" class="bg-blue-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-900 transition duration-300">
+                     Export to GitHub
+                 </button>
+            </section>
+        </main>
+    </div>
+
+    <div id="exportModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full p-6 md:p-8 transform scale-95 transition-transform duration-300">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold brand-header">Export to GitHub</h3>
+                <button id="closeModalBtn" class="text-3xl text-gray-400 hover:text-gray-600">&times;</button>
+            </div>
+            <p class="brand-subheader mb-4">Follow these steps to save this infographic to your `opendemos` repository.</p>
+            <div class="space-y-4 text-left">
+                <div>
+                    <h4 class="font-bold text-lg brand-header">Step 1: Copy the Code</h4>
+                    <p class="text-sm brand-subheader mb-2">The complete HTML source code for this page is in the box below. Click the button to copy it all.</p>
+                    <textarea id="htmlCode" readonly class="w-full h-48 p-2 border border-gray-300 rounded-md bg-gray-50 font-mono text-xs"></textarea>
+                    <button id="copyCodeBtn" class="mt-2 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition w-full md:w-auto">Copy Code</button>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg brand-header">Step 2: Go to Your Repo</h4>
+                    <p class="text-sm brand-subheader mb-2">The link below will take you directly to the "Create new file" page in a new `folk-crm-plan` folder within your `opendemos` repo, with the filename `index.html` already filled in.</p>
+                    <a href="https://github.com/Esteve32/opendemos/new/main/folk-crm-plan/?filename=index.html" target="_blank" rel="noopener noreferrer" class="inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                        Create `index.html` in `opendemos` repo
+                    </a>
+                </div>
+                <div>
+                     <h4 class="font-bold text-lg brand-header">Step 3: Paste and Commit</h4>
+                     <p class="text-sm brand-subheader">Paste the copied code into the GitHub file editor and commit the new file to save it.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const exportBtn = document.getElementById('exportBtn');
+        const modal = document.getElementById('exportModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const htmlCodeTextarea = document.getElementById('htmlCode');
+        const copyCodeBtn = document.getElementById('copyCodeBtn');
+        const modalContent = modal.querySelector('div');
+
+        function openModal() {
+            htmlCodeTextarea.value = document.documentElement.outerHTML;
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        exportBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        copyCodeBtn.addEventListener('click', () => {
+            htmlCodeTextarea.select();
+            navigator.clipboard.writeText(htmlCodeTextarea.value).then(() => {
+                copyCodeBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyCodeBtn.textContent = 'Copy Code';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                copyCodeBtn.textContent = 'Failed to copy';
+            });
+        });
+    </script>
+</body>
+</html>
+
+

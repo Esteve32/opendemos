@@ -1,14 +1,15 @@
-# Gemini HTML Manager
+# OpenDemos - Visual Mockups Gallery
 
-A comprehensive solution for managing, storing, and sharing HTML exports from Google Gemini with seamless Google Workspace integration.
+A public gallery for showcasing interactive demos and visual mockups, featuring AI-generated content, modern web applications, and the comprehensive Gemini HTML Manager.
 
 ## 🌟 Features
 
-- **📁 Local HTML File Management**: Organize and manage dozens of HTML files from Google Gemini exports
+- **🎨 Public Demo Gallery**: Beautiful landing page showcasing visual mockups and interactive demos
+- **📁 Gemini HTML Manager**: Full-featured web application for managing HTML exports from Google Gemini
 - **☁️ Google Drive Integration**: Upload HTML files to Google Drive with automatic sharing
 - **📄 Google Docs Conversion**: Convert HTML files to Google Docs for collaborative editing
 - **🔍 Advanced Search**: Search files by filename, title, or content
-- **🌐 Web Interface**: Modern web interface for easy file management
+- **🌐 Modern Web Interface**: Clean, responsive design with Bootstrap
 - **⚡ CLI Tools**: Command-line interface for automation and batch operations
 - **🔄 Batch Operations**: Upload multiple files at once, cleanup duplicates
 - **📊 Analytics**: File statistics and organization by date
@@ -26,28 +27,33 @@ cd opendemos
 pip install -r requirements.txt
 ```
 
-### 2. Setup Google Workspace Integration
+### 2. Start the Demo Gallery
+
+**Simple Server Launch:**
+```bash
+python start_server.py
+```
+
+**Or using the CLI:**
+```bash
+python scripts/gemini_manager.py web
+```
+
+**Access Points:**
+- **🏠 Public Demo Gallery**: http://localhost:5000/
+- **🛠️ Gemini HTML Manager**: http://localhost:5000/gemini-manager
+- **📁 File Browser**: http://localhost:5000/gemini-manager/files
+
+### 3. Setup Google Workspace Integration (Optional)
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project or select existing one
 3. Enable **Google Drive API** and **Google Docs API**
 4. Create **OAuth 2.0 Client ID** for Desktop application
 5. Download credentials as `credentials.json` in the project root
-6. Run setup:
 
-```bash
-python scripts/gemini_manager.py setup
-```
+### 4. Command Line Usage
 
-### 3. Start Using
-
-**Web Interface:**
-```bash
-python scripts/gemini_manager.py web
-# Open http://localhost:5000
-```
-
-**Command Line:**
 ```bash
 # Import HTML file
 python scripts/gemini_manager.py import-file path/to/your/file.html
@@ -59,7 +65,22 @@ python scripts/gemini_manager.py upload path/to/file.html --convert
 python scripts/gemini_manager.py batch-upload
 ```
 
-## 📋 Usage Guide
+## 📋 Demo Gallery
+
+### Live Interactive Demos
+
+- **🛠️ Gemini HTML Manager**: Full web application for managing AI-generated HTML content with Google Workspace integration
+- **📊 Data Visualization Canvas**: Interactive infographic showcasing data visualization trends (Gemini AI-generated)
+- **📈 Marketing Strategy Presentation**: Comprehensive marketing strategy with modern design (AI-generated)
+- **💻 Colibri OS Dashboard**: Modern operating system interface mockup with interactive widgets
+
+### Static Mockups & Visual Content
+
+The gallery includes various HTML files in:
+- `html_exports/` - AI-generated content from Google Gemini Canvas
+- `projects/` - Custom dashboard mockups and UI designs
+
+## 📖 Usage Guide
 
 ### Managing HTML Files
 

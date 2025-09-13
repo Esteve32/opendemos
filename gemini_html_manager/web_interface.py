@@ -1,7 +1,7 @@
 """
 Web interface for Gemini HTML Manager
 """
-from flask import Flask, render_template, request, jsonify, send_file, redirect, url_for, flash
+from flask import Flask, render_template, request, jsonify, send_file, redirect, url_for, flash, send_from_directory
 import os
 import sys
 from datetime import datetime
@@ -22,6 +22,12 @@ workspace_manager = GoogleWorkspaceManager()
 
 
 @app.route('/')
+def public_index():
+    """Serve the public landing page"""
+    return send_from_directory(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'index.html')
+
+@app.route('/gemini-manager')
+@app.route('/gemini-manager/')
 def index():
     """Main dashboard"""
     files = file_manager.list_html_files()
@@ -34,13 +40,13 @@ def index():
         'files_with_images': sum(1 for f in files if f.get('has_images', False))
     }
     
-    return render_template('index.html', 
+    return render_template('dashboard.html', 
                          files=files[:10],  # Show latest 10 files
                          organized_files=organized_files,
                          stats=stats)
 
 
-@app.route('/files')
+@app.route('/gemini-manager/files')
 def list_files():
     """List all files"""
     search_query = request.args.get('search', '')
@@ -53,7 +59,7 @@ def list_files():
     return render_template('files.html', files=files, search_query=search_query)
 
 
-@app.route('/file/<path:filename>')
+@app.route('/gemini-manager/file/<path:filename>')
 def view_file(filename):
     """View HTML file"""
     file_path = os.path.join(file_manager.export_directory, filename)
@@ -79,7 +85,7 @@ def view_file(filename):
                          content=content)
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/gemini-manager/upload', methods=['GET', 'POST'])
 def upload_file():
     """Upload file to local storage"""
     if request.method == 'POST':
@@ -116,7 +122,7 @@ def upload_file():
     return render_template('upload.html')
 
 
-@app.route('/google_drive')
+@app.route('/gemini-manager/google_drive')
 def google_drive():
     """Google Drive integration page"""
     if not workspace_manager.credentials:
@@ -265,7 +271,7 @@ def api_cleanup_duplicates():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/download/<path:filename>')
+@app.route('/gemini-manager/download/<path:filename>')
 def download_file(filename):
     """Download HTML file"""
     file_path = os.path.join(file_manager.export_directory, filename)
@@ -290,6 +296,16 @@ def internal_error(error):
                          error_code=500,
                          error_message="Internal server error"), 500
 
+
+@app.route('/html_exports/<path:filename>')
+def serve_html_exports(filename):
+    """Serve HTML export files"""
+    return send_from_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'html_exports'), filename)
+
+@app.route('/projects/<path:filename>')
+def serve_projects(filename):
+    """Serve project files"""
+    return send_from_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'projects'), filename)
 
 if __name__ == '__main__':
     host = config.get('web_interface.host', 'localhost')

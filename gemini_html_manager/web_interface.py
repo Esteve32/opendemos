@@ -24,7 +24,18 @@ workspace_manager = GoogleWorkspaceManager()
 @app.route('/')
 def public_index():
     """Serve the public landing page"""
-    return send_from_directory(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'index.html')
+    # Check if we have the new GitHub Pages index.html or fall back to Flask landing
+    try:
+        # Try to serve the new GitHub Pages compatible index
+        return send_from_directory(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'index.html')
+    except:
+        # Fallback to Flask-based landing page if the new index doesn't exist
+        return send_from_directory(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'index-flask-landing.html')
+
+@app.route('/flask-landing')
+def flask_landing():
+    """Serve the original Flask landing page for comparison"""
+    return send_from_directory(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'index-flask-landing.html')
 
 @app.route('/gemini-manager')
 @app.route('/gemini-manager/')
@@ -306,6 +317,21 @@ def serve_html_exports(filename):
 def serve_projects(filename):
     """Serve project files"""
     return send_from_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'projects'), filename)
+
+@app.route('/assets/<path:filename>')
+def serve_assets(filename):
+    """Serve static assets for GitHub Pages index"""
+    return send_from_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets'), filename)
+
+@app.route('/demos/<path:filename>')
+def serve_demos(filename):
+    """Serve demo files"""
+    return send_from_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'demos'), filename)
+
+@app.route('/demos.json')
+def serve_demos_manifest():
+    """Serve demos manifest for GitHub Pages index"""
+    return send_from_directory(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'demos.json')
 
 if __name__ == '__main__':
     host = config.get('web_interface.host', 'localhost')

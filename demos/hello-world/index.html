@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hello World Demo</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; line-height: 1.5; margin: 0; padding: 24px; }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; }
+    p { color: #555; }
+    .box { margin-top: 16px; padding: 16px; border: 1px solid #ddd; border-radius: 8px; }
+    button { padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Hello World</h1>
+    <p>This is a minimal demo page. Use it as a starting point for new demos in the repository.</p>
+    <div class="box">
+      <p>Counter: <span id="count">0</span></p>
+      <button id="inc">Increment</button>
+    </div>
+  </div>
+  <script>
+    const count = document.getElementById('count');
+    document.getElementById('inc').addEventListener('click', () => {
+      count.textContent = String(Number(count.textContent || '0') + 1);
+    });
+  </script>
+</body>
+</html>

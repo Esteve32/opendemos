@@ -1,6 +1,64 @@
-# OpenDemos - Visual Mockups Gallery
+# Open Demos
 
-A public gallery for showcasing interactive demos and visual mockups, featuring AI-generated content, modern web applications, and the comprehensive Gemini HTML Manager.
+A simple, extensible structure for hosting and browsing multiple demos from a single, nice-looking index page.
+
+## Shareable link
+Once GitHub Pages is enabled (Settings → Pages → Deploy from a branch → main + root `/`), your public URL will be:
+
+- https://esteve32.github.io/opendemos/
+
+## Repository structure
+```
+opendemos/
+├─ index.html              # Main index page (cards, search, links to demos)
+├─ demos.json              # Manifest consumed by index.html
+├─ assets/
+│  ├─ styles.css
+│  └─ script.js
+├─ demos/
+│  ├─ hello-world/
+│  │  ├─ index.html
+│  │  └─ meta.json
+└─ tools/
+   └─ build-manifest.mjs   # Optional: auto-generate demos.json from demos/*
+```
+
+## Add a new demo
+1. Create a new folder under `demos/<your-demo-id>/`.
+2. Add:
+   - `index.html` (the demo)
+   - Optional: `thumbnail.(png|jpg|webp)` (a small preview image)
+   - `meta.json` with:
+     ```json
+     {
+       "title": "My Demo",
+       "description": "One-liner about the demo",
+       "tags": ["tag1", "tag2"]
+     }
+     ```
+3. Update `demos.json` with your new demo entry (or run the optional build script below).
+
+## Optional: auto-generate `demos.json`
+If you prefer not to hand-edit `demos.json`, run:
+```
+node tools/build-manifest.mjs
+```
+This scans each `demos/*` folder and creates/updates the manifest.
+
+## Local preview
+You can open `index.html` directly, but `fetch` of `demos.json` may require a local server:
+```
+# one-liners (pick one)
+npx http-server -p 8080 .
+python3 -m http.server 8080
+```
+Then visit http://localhost:8080
+
+---
+
+## Legacy: OpenDemos - Visual Mockups Gallery
+
+This repository also includes the comprehensive Gemini HTML Manager for managing AI-generated content and web applications.
 
 ## 🌟 Features
 

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open Demos</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <meta name="color-scheme" content="light dark">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .hero-section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .demo-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #333;
+        }
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .demo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .demo-link:hover {
+            color: inherit;
+        }
+        .category-header {
+            color: white;
+            margin: 3rem 0 1.5rem 0;
+            text-align: center;
+        }
+        .demo-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .badge-live {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+        .badge-static {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            color: white;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="display-4 fw-bold mb-4">
+                <i class="bi bi-grid-3x3-gap"></i> OpenDemos
+            </h1>
+            <p class="lead mb-4">Fast Visual Mockups & Interactive Demos</p>
+            <p class="mb-0">Explore a collection of AI-generated content, interactive dashboards, and modern web applications</p>
+        </div>
+
+        <!-- Interactive Web Applications -->
+        <div class="category-header">
+            <h2><i class="bi bi-lightning-charge"></i> Interactive Web Applications</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <a href="/gemini-manager" class="demo-link" target="_blank">
+                    <div class="demo-card">
+                        <div class="text-center">
+                            <i class="bi bi-file-earmark-code demo-icon"></i>
+                            <h4>Gemini HTML Manager</h4>
+                            <span class="badge badge-live mb-3">Live App</span>
+                            <p class="text-muted">Full-featured web application for managing HTML exports from Google Gemini with Google Workspace integration. Upload, organize, and share AI-generated content.</p>
+                            <div class="d-flex justify-content-between text-small">
+                                <span><i class="bi bi-tools"></i> Flask, Python</span>
+                                <span><i class="bi bi-cloud"></i> Google APIs</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- AI-Generated Visual Content -->
+        <div class="category-header">
+            <h2><i class="bi bi-palette"></i> AI-Generated Visual Content</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <a href="html_exports/gemini_canvas_data_viz.html" class="demo-link" target="_blank">
+                    <div class="demo-card">
+                        <div class="text-center">
+                            <i class="bi bi-bar-chart demo-icon"></i>
+                            <h4>Data Visualization Canvas</h4>
+                            <span class="badge badge-static mb-3">Static Demo</span>
+                            <p class="text-muted">Interactive infographic created with Google Gemini Canvas showcasing data visualization trends and techniques.</p>
+                            <div class="d-flex justify-content-between text-small">
+                                <span><i class="bi bi-graph-up"></i> Data Viz</span>
+                                <span><i class="bi bi-stars"></i> Gemini AI</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <a href="html_exports/marketing_strategy_presentation.html" class="demo-link" target="_blank">
+                    <div class="demo-card">
+                        <div class="text-center">
+                            <i class="bi bi-presentation demo-icon"></i>
+                            <h4>Marketing Strategy Presentation</h4>
+                            <span class="badge badge-static mb-3">Static Demo</span>
+                            <p class="text-muted">Comprehensive marketing strategy presentation generated with AI, featuring modern design and strategic insights.</p>
+                            <div class="d-flex justify-content-between text-small">
+                                <span><i class="bi bi-megaphone"></i> Marketing</span>
+                                <span><i class="bi bi-stars"></i> AI Generated</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Dashboard Mockups -->
+        <div class="category-header">
+            <h2><i class="bi bi-speedometer2"></i> Dashboard Mockups</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <a href="projects/colibri-os-dashboard-mockup.html" class="demo-link" target="_blank">
+                    <div class="demo-card">
+                        <div class="text-center">
+                            <i class="bi bi-laptop demo-icon"></i>
+                            <h4>Colibri OS Dashboard</h4>
+                            <span class="badge badge-static mb-3">Mockup</span>
+                            <p class="text-muted">Modern operating system dashboard mockup featuring clean design and intuitive user interface elements.</p>
+                            <div class="d-flex justify-content-between text-small">
+                                <span><i class="bi bi-display"></i> OS Design</span>
+                                <span><i class="bi bi-layout-wtf"></i> UI/UX</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Access Links -->
+        <div class="category-header">
+            <h2><i class="bi bi-link-45deg"></i> Quick Access</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <a href="/gemini-manager/files" class="demo-link" target="_blank">
+                    <div class="demo-card">
+                        <div class="text-center">
+                            <i class="bi bi-folder demo-icon"></i>
+                            <h4>Browse All Files</h4>
+                            <span class="badge badge-live mb-3">Directory</span>
+                            <p class="text-muted">Browse and search through all available HTML files and demos in the collection.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <a href="/gemini-manager/upload" class="demo-link" target="_blank">
+                    <div class="demo-card">
+                        <div class="text-center">
+                            <i class="bi bi-upload demo-icon"></i>
+                            <h4>Upload New Demo</h4>
+                            <span class="badge badge-live mb-3">Feature</span>
+                            <p class="text-muted">Upload your own HTML files and mockups to add them to the public gallery.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <a href="https://github.com/Esteve32/opendemos" class="demo-link" target="_blank">
+                    <div class="demo-card">
+                        <div class="text-center">
+                            <i class="bi bi-github demo-icon"></i>
+                            <h4>Source Code</h4>
+                            <span class="badge badge-live mb-3">GitHub</span>
+                            <p class="text-muted">View the source code and contribute to this open-source project on GitHub.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2024 OpenDemos - Showcasing AI-Generated Content & Modern Web Development</p>
+            <p class="small">Built with ❤️ using Flask, Bootstrap, and various AI tools</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

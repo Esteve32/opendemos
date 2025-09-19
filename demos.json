@@ -1,0 +1,66 @@
+[
+  {
+    "id": "colibri-os",
+    "title": "Colibri OS Dashboard",
+    "description": "Modern operating system interface mockup with interactive widgets and sleek design",
+    "path": "demos/colibri-os/index.html",
+    "thumbnail": "",
+    "tags": [
+      "os",
+      "dashboard",
+      "mockup",
+      "interface",
+      "interactive"
+    ]
+  },
+  {
+    "id": "data-visualization",
+    "title": "Data Visualization Canvas",
+    "description": "Interactive infographic showcasing data visualization trends and technologies",
+    "path": "demos/data-visualization/index.html",
+    "thumbnail": "",
+    "tags": [
+      "data-viz",
+      "ai-generated",
+      "interactive",
+      "infographic"
+    ]
+  },
+  {
+    "id": "folk-crm",
+    "title": "Folk CRM Planning",
+    "description": "CRM platform analysis and strategic planning documentation",
+    "path": "demos/folk-crm/index.html",
+    "thumbnail": "",
+    "tags": [
+      "crm",
+      "planning",
+      "strategy",
+      "business"
+    ]
+  },
+  {
+    "id": "hello-world",
+    "title": "Hello World",
+    "description": "A minimal starter demo.",
+    "path": "demos/hello-world/index.html",
+    "thumbnail": "",
+    "tags": [
+      "starter",
+      "example"
+    ]
+  },
+  {
+    "id": "marketing-strategy",
+    "title": "Marketing Strategy Presentation",
+    "description": "Comprehensive marketing strategy presentation with modern design elements",
+    "path": "demos/marketing-strategy/index.html",
+    "thumbnail": "",
+    "tags": [
+      "marketing",
+      "strategy",
+      "ai-generated",
+      "presentation"
+    ]
+  }
+]

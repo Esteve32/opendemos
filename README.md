@@ -1,132 +1,155 @@
-# OpenDemos - Visual Mockups Gallery
+# OpenDemos — ArboraOS Experimentation Playground
 
-A public gallery for showcasing interactive demos and visual mockups, featuring AI-generated content, modern web applications, and the comprehensive Gemini HTML Manager.
+A public experimentation playground for **ArboraOS** concepts, interactive browser demos, and tooling workflows.
 
-## 🌟 Features
+This repository combines:
+- a visual demo gallery,
+- AI-assisted HTML project experiments,
+- and the **Gemini HTML Manager** for importing, organizing, and publishing HTML artifacts.
 
-- **🎨 Public Demo Gallery**: Beautiful landing page showcasing visual mockups and interactive demos
-- **📁 Gemini HTML Manager**: Full-featured web application for managing HTML exports from Google Gemini
-- **☁️ Google Drive Integration**: Upload HTML files to Google Drive with automatic sharing
-- **📄 Google Docs Conversion**: Convert HTML files to Google Docs for collaborative editing
-- **🔍 Advanced Search**: Search files by filename, title, or content
-- **🌐 Modern Web Interface**: Clean, responsive design with Bootstrap
-- **⚡ CLI Tools**: Command-line interface for automation and batch operations
-- **🔄 Batch Operations**: Upload multiple files at once, cleanup duplicates
-- **📊 Analytics**: File statistics and organization by date
+---
+
+## 🌟 What this repo is for
+
+OpenDemos is the sandbox where ArboraOS ideas are tested quickly and shared visibly.
+
+### Core goals
+- Prototype ArboraOS UI/UX and interaction patterns in the browser
+- Experiment with AI-generated HTML content and workflows
+- Keep demos reproducible, lightweight, and easy to run
+- Provide practical tooling for export, search, organization, and publishing
+
+---
+
+## 🧩 Features
+
+- **🎨 Public Demo Gallery**: Landing page for visual mockups and interactive demos
+- **🖥️ ArboraOS-Oriented Experiments**: Browser-first sandbox for OS-like interfaces and component ideas
+- **📁 Gemini HTML Manager**: Manage HTML exports from Google Gemini
+- **☁️ Google Drive Integration**: Upload HTML files with sharing controls
+- **📄 Google Docs Conversion**: Convert HTML to collaborative Google Docs
+- **🔍 Advanced Search**: Search by filename, title, or content
+- **🌐 Modern Web Interface**: Responsive Bootstrap-based UI
+- **⚡ CLI Tools**: Automation and batch workflows
+- **🔄 Batch Operations**: Multi-file upload and duplicate cleanup
+- **📊 Metadata/Analytics**: File metadata and date-based organization
+
+---
 
 ## 🚀 Quick Start
 
-### 1. Installation
+### 1) Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/Esteve32/opendemos.git
 cd opendemos
-
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Start the Demo Gallery
+### 2) Start the playground
 
-**Simple Server Launch:**
+**Simple launch:**
 ```bash
 python start_server.py
 ```
 
-**Or using the CLI:**
+**Or via CLI:**
 ```bash
 python scripts/gemini_manager.py web
 ```
 
-**Access Points:**
-- **🏠 Public Demo Gallery**: http://localhost:5000/
+### 3) Open in browser
+
+- **🏠 Demo Gallery**: http://localhost:5000/
 - **🛠️ Gemini HTML Manager**: http://localhost:5000/gemini-manager
 - **📁 File Browser**: http://localhost:5000/gemini-manager/files
 
-### 3. Setup Google Workspace Integration (Optional)
+---
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select existing one
-3. Enable **Google Drive API** and **Google Docs API**
-4. Create **OAuth 2.0 Client ID** for Desktop application
-5. Download credentials as `credentials.json` in the project root
+## 🧪 ArboraOS Experimentation Workflow
 
-### 4. Command Line Usage
+A recommended loop for this repo:
 
-```bash
-# Import HTML file
-python scripts/gemini_manager.py import-file path/to/your/file.html
+1. **Prototype** UI concepts in HTML demos (`projects/`, `html_exports/`, or dedicated demo files)
+2. **Review** visually in the local gallery
+3. **Refine** content and structure with CLI/web tooling
+4. **Publish/Share** via Google Drive or convert to Docs for collaboration
+5. **Iterate** quickly with small, isolated updates
 
-# Upload to Google Drive
-python scripts/gemini_manager.py upload path/to/file.html --convert
-
-# Batch operations
-python scripts/gemini_manager.py batch-upload
-```
+---
 
 ## 📋 Demo Gallery
 
-### Live Interactive Demos
+### Live interactive demos
+- **🛠️ Gemini HTML Manager**: Web app for AI-generated HTML management + Google Workspace integration
+- **📊 Data Visualization Canvas**: Interactive infographic demo
+- **📈 Marketing Strategy Presentation**: AI-assisted presentation demo
+- **💻 Colibri OS Dashboard**: OS-style interactive dashboard mockup (useful reference for ArboraOS UI exploration)
 
-- **🛠️ Gemini HTML Manager**: Full web application for managing AI-generated HTML content with Google Workspace integration
-- **📊 Data Visualization Canvas**: Interactive infographic showcasing data visualization trends (Gemini AI-generated)
-- **📈 Marketing Strategy Presentation**: Comprehensive marketing strategy with modern design (AI-generated)
-- **💻 Colibri OS Dashboard**: Modern operating system interface mockup with interactive widgets
+### Static mockups and visual content
+- `html_exports/` — AI-generated exports from Google Gemini Canvas
+- `projects/` — custom dashboard mockups and UI designs
 
-### Static Mockups & Visual Content
-
-The gallery includes various HTML files in:
-- `html_exports/` - AI-generated content from Google Gemini Canvas
-- `projects/` - Custom dashboard mockups and UI designs
+---
 
 ## 📖 Usage Guide
 
-### Managing HTML Files
+### Manage HTML files
 
-#### Import Files
-- **Web Interface**: Use the Upload page to drag & drop or select files
-- **CLI**: `python scripts/gemini_manager.py import-file <path> --name "new-name"`
+**Import**
+- Web: Upload page (drag/drop or picker)
+- CLI:
+```bash
+python scripts/gemini_manager.py import-file <path> --name "new-name"
+```
 
-#### View and Organize
-- Files are automatically organized by date
-- Search functionality for quick finding
+**Organize**
+- Date-based organization
+- Search by metadata/content
 - Metadata extraction (title, word count, images, etc.)
 
-### Google Workspace Integration
+---
 
-#### Upload to Google Drive
-- Files are uploaded to "Gemini HTML Exports" folder
-- Automatic public sharing (anyone with link can view)
-- Preserves original formatting
+## ☁️ Google Workspace Integration (Optional)
 
-#### Convert to Google Docs
-- HTML content converted to editable Google Docs
-- Maintains structure and formatting where possible
-- Enables collaborative editing and comments
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create/select a project
+3. Enable **Google Drive API** and **Google Docs API**
+4. Create **OAuth 2.0 Client ID** (Desktop app)
+5. Save credentials as `credentials.json` in project root
 
-### Batch Operations
+### Upload to Google Drive
+- Uploads to **Gemini HTML Exports** folder
+- Supports sharing links
+- Preserves source formatting where possible
 
-#### Upload Multiple Files
+### Convert to Google Docs
+- Converts HTML into editable Docs
+- Keeps structure/formatting as much as possible
+- Enables collaborative editing/comments
+
+---
+
+## 🔄 Batch operations
+
 ```bash
-# Upload all files in export directory
+# Upload all files in default export directory
 python scripts/gemini_manager.py batch-upload
 
 # Upload from specific directory
 python scripts/gemini_manager.py batch-upload --directory /path/to/html/files
 
-# Convert all to Google Docs
+# Convert batch to Google Docs
 python scripts/gemini_manager.py batch-upload --convert
-```
 
-#### Cleanup and Maintenance
-```bash
-# Remove duplicate files
+# Cleanup duplicates
 python scripts/gemini_manager.py cleanup
 
-# Export file list
+# Export inventory list
 python scripts/gemini_manager.py export-list --format csv
 ```
+
+---
 
 ## 🔧 Configuration
 
@@ -152,25 +175,25 @@ web_interface:
   debug: false
 ```
 
+---
+
 ## 📖 API Reference
 
-### REST API Endpoints
+### REST endpoints
+- `GET /api/search?q=query` — Search files
+- `POST /api/upload_to_drive` — Upload a file to Drive
+- `POST /api/batch_upload_to_drive` — Batch upload
+- `GET /api/file_metadata/<filename>` — Read metadata
+- `POST /api/cleanup_duplicates` — Remove duplicates
 
-- `GET /api/search?q=query` - Search files
-- `POST /api/upload_to_drive` - Upload single file to Google Drive
-- `POST /api/batch_upload_to_drive` - Batch upload to Google Drive
-- `GET /api/file_metadata/<filename>` - Get file metadata
-- `POST /api/cleanup_duplicates` - Remove duplicate files
-
-### CLI Commands
-
+### CLI commands
 ```bash
 # File management
 python scripts/gemini_manager.py import-file <path>
 python scripts/gemini_manager.py list-files
 python scripts/gemini_manager.py search <query>
 
-# Google Drive integration
+# Drive integration
 python scripts/gemini_manager.py upload <file> [--convert]
 python scripts/gemini_manager.py batch-upload [--directory <path>] [--convert]
 python scripts/gemini_manager.py list-drive-files
@@ -180,72 +203,62 @@ python scripts/gemini_manager.py cleanup
 python scripts/gemini_manager.py export-list [--format csv|json]
 ```
 
-## 💡 Use Cases
-
-### For Individual Users
-- Store and organize Gemini Canvas exports
-- Share infographics with colleagues
-- Convert presentations to collaborative docs
-- Archive important AI-generated content
-
-### For Teams
-- Centralized repository of AI-generated materials
-- Collaborative editing of Gemini outputs
-- Standardized sharing workflows
-- Team knowledge base from AI interactions
-
-### For Organizations
-- Systematic management of AI-generated content
-- Integration with existing Google Workspace workflows
-- Bulk processing of AI outputs
-- Long-term archival and searchability
+---
 
 ## 🛠️ Development
 
-### Project Structure
-```
+### Project structure
+```text
 opendemos/
 ├── gemini_html_manager/     # Core Python package
 │   ├── __init__.py
-│   ├── config.py           # Configuration management
-│   ├── file_manager.py     # Local file operations
-│   ├── google_workspace.py # Google APIs integration
-│   └── web_interface.py    # Flask web app
+│   ├── config.py            # Configuration management
+│   ├── file_manager.py      # Local file operations
+│   ├── google_workspace.py  # Google APIs integration
+│   └── web_interface.py     # Flask web app
 ├── scripts/
-│   └── gemini_manager.py   # CLI interface
-├── templates/              # Web interface templates
-├── html_exports/           # Local HTML file storage
-├── docs/                   # Documentation
-├── requirements.txt        # Python dependencies
-└── config.example.yaml     # Configuration template
+│   └── gemini_manager.py    # CLI interface
+├── templates/               # Web interface templates
+├── html_exports/            # Local HTML file storage
+├── docs/                    # Documentation
+├── requirements.txt         # Python dependencies
+└── config.example.yaml      # Configuration template
 ```
 
-### Contributing
+### Contribution
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 License
-
-This project is open source. Feel free to use, modify, and distribute according to your needs.
-
-## 🤝 Support
-
-- **Issues**: Report bugs or request features on GitHub Issues
-- **Documentation**: Check the `docs/` directory for detailed guides
-- **Community**: Share your use cases and tips
-
-## 🔮 Roadmap
-
-- [ ] Support for more file formats (PDF, DOCX)
-- [ ] Advanced analytics and reporting
-- [ ] Integration with other cloud storage providers
-- [ ] Mobile-friendly web interface
-- [ ] Automated content analysis and tagging
-- [ ] Webhook support for automated workflows
+3. Make focused changes
+4. Add tests where applicable
+5. Open a pull request
 
 ---
 
-**Made for managing Google Gemini exports with ❤️**
+## ✅ Experimentation Principles
+
+- Keep experiments small and isolated
+- Prefer readable HTML/CSS/JS + minimal Python helpers
+- Document how to run each demo quickly
+- Avoid heavy dependencies unless necessary
+- Never commit secrets or credentials
+
+---
+
+## 🔮 Roadmap
+
+- [ ] More ArboraOS UI/interaction experiment packs
+- [ ] Additional file format support (PDF, DOCX)
+- [ ] Enhanced analytics and tagging
+- [ ] More cloud storage integrations
+- [ ] Mobile-first gallery refinements
+- [ ] Optional automation/webhooks for experiment workflows
+
+---
+
+## 📄 License
+
+This project is open source. Add or update the specific license file (e.g., MIT) as needed.
+
+---
+
+**Built as an experimentation playground for ArboraOS + AI HTML workflows.**
